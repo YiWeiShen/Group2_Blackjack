@@ -10,4 +10,10 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="play_now">"Play Now"</string>
+    <string name="username_label">Username</string>
+    <string name="username_hint">Enter username..</string>
+    <string name="pw_label">Password</string>
+    <string name="pw_hint">Enter password..</string>
+    <string name="pw_confirm_label">Confirm password</string>
+    <string name="pw_confirm_hint">Enter password..</string>
 </resources>

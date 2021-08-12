@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Group2_Blackjack" >
         <activity
-            android:name=".MainActivity2"
+            android:name=".RegisterActivity"
             android:exported="true" />
         <activity android:name=".MainActivity" >
             <intent-filter>
