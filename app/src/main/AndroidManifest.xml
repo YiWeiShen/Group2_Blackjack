@@ -11,10 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Group2_Blackjack" >
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:exported="true"
-            android:label="@string/title_activity_login" />
-        <activity
             android:name=".MainActivity2"
             android:exported="true" />
         <activity android:name=".MainActivity" >
