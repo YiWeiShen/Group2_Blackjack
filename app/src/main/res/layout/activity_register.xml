@@ -12,11 +12,13 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/register_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Register"
-            android:textSize="20sp" />
+            android:layout_height="55dp"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:text="@string/register_title"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/username_label"
@@ -80,9 +82,10 @@
             android:layout_width="140dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
-            android:text="Submit"
+            android:text="@string/submit_btn"
             android:textColor="@color/black"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:backgroundTint="@color/design_default_color_error" />
 
     </LinearLayout>
