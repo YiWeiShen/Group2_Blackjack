@@ -34,7 +34,6 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/username_hint"
-            android:hintTextColor="#757575"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             tools:ignore="TextContrastCheck"
@@ -54,10 +53,11 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/pw_hint"
+            android:importantForAutofill="no"
             android:inputType="textPassword"
             android:minHeight="48dp"
-            tools:ignore="DuplicateSpeakableTextCheck"
-            android:importantForAutofill="no" />
+            android:textColorHint="#757575"
+            tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
 
         <TextView
             android:id="@+id/password_confirm_label"
@@ -73,12 +73,14 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/pw_confirm_hint"
+            android:importantForAutofill="no"
             android:inputType="textPassword"
             android:minHeight="48dp"
-            android:importantForAutofill="no" />
+            android:textColorHint="#757575"
+            tools:ignore="TextContrastCheck" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/submit_btn"
             android:layout_width="140dp"
             android:layout_height="70dp"
             android:layout_gravity="center"

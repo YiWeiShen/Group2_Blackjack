@@ -4,31 +4,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:baselineAligned="false">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:background="#4CAF50"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/logo"
             android:layout_width="match_parent"
             android:layout_height="155dp"
+            android:layout_margin="20dp"
+            android:contentDescription="app logo"
             app:srcCompat="@android:drawable/editbox_dropdown_light_frame" />
 
+        <EditText
+            android:id="@+id/login_nameInput"
+            android:layout_width="246dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="Enter your username"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/login_passwordInput"
+            android:layout_width="246dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="Enter your password"
+            android:inputType="textPassword"
+            android:minHeight="48dp" />
+
         <Button
-            android:id="@+id/start_btn"
+            android:id="@+id/login_btn"
             android:layout_width="246dp"
             android:layout_height="75dp"
             android:layout_gravity="center"
-            android:layout_marginTop="130dp"
+            android:layout_marginTop="10dp"
             android:shadowColor="@color/cardview_dark_background"
-            android:text="@string/play_now"
+            android:text="@string/login_title"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:backgroundTint="#A30808" />
+            app:backgroundTint="#FF5722" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/reg_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="75dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:shadowColor="@color/cardview_dark_background"
+                android:text="@string/register_title"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:backgroundTint="#00BCD4" />
+
+            <Button
+                android:id="@+id/guest_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="75dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:shadowColor="@color/cardview_dark_background"
+                android:text="@string/play_now"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:backgroundTint="#00BCD4" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
