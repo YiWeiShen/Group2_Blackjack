@@ -9,17 +9,32 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button start_btn;
+    Button reg_btn, login_btn, guest_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_main);
 
-        start_btn = findViewById(R.id.login_btn);
+        reg_btn = findViewById(R.id.reg_btn);
+        login_btn = findViewById(R.id.login_btn);
+        guest_btn = findViewById(R.id.guest_btn);
 
-        start_btn.setOnClickListener(new View.OnClickListener() {
+        reg_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+            }
+        });
+
+        login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+            }
+        });
+
+        guest_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, RegisterActivity.class));
