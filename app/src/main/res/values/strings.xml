@@ -9,7 +9,7 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="play_now">"Play Now"</string>
+    <string name="play_now">Play As a Guest</string>
     <string name="username_label">Username</string>
     <string name="username_hint">Enter username..</string>
     <string name="pw_label">Password</string>
@@ -17,5 +17,6 @@
     <string name="pw_confirm_label">Confirm password</string>
     <string name="pw_confirm_hint">Enter password..</string>
     <string name="register_title">REGISTER</string>
+    <string name="login_title">LOGIN</string>
     <string name="submit_btn">SUBMIT</string>
 </resources>

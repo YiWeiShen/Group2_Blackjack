@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_main);
 
-        start_btn = findViewById(R.id.start_btn);
+        start_btn = findViewById(R.id.login_btn);
 
         start_btn.setOnClickListener(new View.OnClickListener() {
             @Override
