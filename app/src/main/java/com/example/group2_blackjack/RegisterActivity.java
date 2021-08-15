@@ -3,7 +3,6 @@ package com.example.group2_blackjack;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
 
                 String usernameTxt = username.getText().toString();
                 String passwordTxt = password.getText().toString();
