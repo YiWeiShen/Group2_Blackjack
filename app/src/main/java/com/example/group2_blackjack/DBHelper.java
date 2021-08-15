@@ -45,6 +45,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("drop Table if exists Userdetails");
     }
 
+//    create new player
     public Boolean insertuserdata(String username, String password){
 
         SQLiteDatabase DB = this.getWritableDatabase();
@@ -52,28 +53,29 @@ public class DBHelper extends SQLiteOpenHelper {
         // (Coloum, value)
         contentValue.put("username",username);
         contentValue.put("password", password);
+        contentValue.put("balance", 1000); // initial balance 1000
+        contentValue.put("score", 0);  // initial score 0
         long result = DB.insert("Userdetails",null,contentValue);
 
         return result != -1;
 
     }
 
-    public Boolean updateuserdata(String name, String contact, String dob){
+    public Boolean updateuserdata(String name, Integer balance, Integer score ){
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValue = new ContentValues(); // keep things in pair
-        contentValue.put("contact", contact);
-        contentValue.put("dob", dob);
+        contentValue.put("balance", balance);
+        contentValue.put("score", score);
         Cursor cursor = DB.rawQuery("Select * from Userdetails where name = ?", new String[]{name});
 
         if(cursor.getCount()>0){
             long result = DB.update("Userdetails",contentValue, "name=?", new String[]{name});
-
-
             return result != -1;
         }
         return false;
     }
 
+    // do we need delete player?
     public Boolean deleteuserdata(String name){
         SQLiteDatabase DB = this.getWritableDatabase();
 

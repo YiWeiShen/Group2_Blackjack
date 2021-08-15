@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 public class GameActivity extends AppCompatActivity {
 
-
     private int player = 0;
     private int[] num = new int[52];
     private String[] rank = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
@@ -39,7 +38,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void deal() {
-
         user.add(num[0]);
         ai.add(num[1]);
         user.add(num[2]);
@@ -106,14 +104,14 @@ public class GameActivity extends AppCompatActivity {
         deal();
     }
 
-    private void userturn(){
+    private void userTurn(){
         user = needCard(user);
         if(currentPoint >= 21){
             result();
         }
     }
 
-    private void aiturn(){
+    private void aiTurn(){
         player = 1;
         while(true) {
             if(computerPoint>currentPoint){
@@ -131,7 +129,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_game);
     }
 }
