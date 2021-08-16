@@ -16,7 +16,7 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity {
 
     ImageView userCard1, userCard2, userCard3, userCard4, userCard5, aiCard1, aiCard2, aiCard3, aiCard4, aiCard5;
-    Button startButton, needButton, stopButton;
+    Button startButton, needButton, stopButton, coin10, coin20, coin50, coin100, clearButton, doubleButton, rankingButton;
     TextView bet_txt, username_txt, balance_txt;
 
     private DBHelper DB;
@@ -243,6 +243,20 @@ public class GameActivity extends AppCompatActivity {
         startButton = findViewById(R.id.button);
         needButton = findViewById(R.id.button1);
         stopButton = findViewById(R.id.button2);
+        coin10 = findViewById(R.id.coin_10);
+        coin20 = findViewById(R.id.coin_20);
+        coin50 = findViewById(R.id.coin_50);
+        coin100 = findViewById(R.id.coin_100);
+        clearButton = findViewById(R.id.btn_clear);
+        doubleButton = findViewById(R.id.btn_double);
+        rankingButton = findViewById(R.id.btn_ranking);
+
+        bet_txt = findViewById((R.id.bet));
+        username_txt = findViewById(R.id.username_ingame);
+        balance_txt = findViewById(R.id.balance_ingame);
+
+        username_txt.setText("User: "+ user.getUsername());
+        balance_txt.setText("Balance: "+user.getBalance());
 
         userCard1 = findViewById(R.id.player_card1);
         userCard2 = findViewById(R.id.player_card2);
@@ -254,13 +268,6 @@ public class GameActivity extends AppCompatActivity {
         aiCard3 = findViewById(R.id.dealer_card3);
         aiCard4 = findViewById(R.id.dealer_card4);
         aiCard5 = findViewById(R.id.dealer_card5);
-
-        bet_txt = findViewById(R.id.bet);
-        username_txt = findViewById(R.id.username_ingame);
-        balance_txt = findViewById(R.id.balance_ingame);
-
-        username_txt.setText("User: "+ user.getUsername());
-        balance_txt.setText("Balance: "+user.getBalance());
 
         startButton.setOnClickListener(new View.OnClickListener() {
 
@@ -296,6 +303,61 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 aiTurn();
+            }
+        });
+
+        coin10.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                bet = 10;
+                String b = "Bet: ";
+                String a = String.valueOf(b) + String.valueOf(bet);
+                bet_txt.setText(a);
+            }
+        });
+
+        coin20.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                bet = 20;
+                String b = "Bet: ";
+                String a = String.valueOf(b) + String.valueOf(bet);
+                bet_txt.setText(a);
+            }
+        });
+
+        coin50.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                bet = 50;
+                String b = "Bet: ";
+                String a = String.valueOf(b) + String.valueOf(bet);
+                bet_txt.setText(a);
+            }
+        });
+
+        coin100.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                bet = 100;
+                String b = "Bet: ";
+                String a = String.valueOf(b) + String.valueOf(bet);
+                bet_txt.setText(a);
+            }
+        });
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                bet = 0;
+                String b = "Bet: ";
+                String a = String.valueOf(b) + String.valueOf(bet);
+                bet_txt.setText(a);
             }
         });
 
