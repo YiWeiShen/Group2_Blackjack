@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -16,7 +17,9 @@ public class GameActivity extends AppCompatActivity {
 
     ImageView userCard1, userCard2, userCard3, userCard4, userCard5, aiCard1, aiCard2, aiCard3, aiCard4, aiCard5;
     Button startButton, needButton, stopButton;
+    TextView bet_txt, username_txt, balance_txt;
 
+    private DBHelper DB;
     private int player = 0;
     private int bet = 0;
     private int[] num = new int[52];
@@ -235,6 +238,8 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        DB = new DBHelper(this);
+        Users user = DB.getUserByName(getIntent().getExtras().getString("username"));
         startButton = findViewById(R.id.button);
         needButton = findViewById(R.id.button1);
         stopButton = findViewById(R.id.button2);
@@ -249,6 +254,13 @@ public class GameActivity extends AppCompatActivity {
         aiCard3 = findViewById(R.id.dealer_card3);
         aiCard4 = findViewById(R.id.dealer_card4);
         aiCard5 = findViewById(R.id.dealer_card5);
+
+        bet_txt = findViewById(R.id.bet);
+        username_txt = findViewById(R.id.username_ingame);
+        balance_txt = findViewById(R.id.balance_ingame);
+
+        username_txt.setText("User: "+ user.getUsername());
+        balance_txt.setText("Balance: "+user.getBalance());
 
         startButton.setOnClickListener(new View.OnClickListener() {
 

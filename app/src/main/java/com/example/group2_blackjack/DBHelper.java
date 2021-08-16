@@ -97,4 +97,16 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         DB.insert("Userdetails", null, contentValue);
     }
+
+    public Users getUserByName(String username) {
+        SQLiteDatabase DB = this.getWritableDatabase();
+        Cursor cursor = DB.rawQuery("Select * from Userdetails where username=?", new String[]{username});
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            Users user = new Users(username, cursor.getString(1), cursor.getInt(2), cursor.getInt(3));
+            return  user;
+        }
+        return null;
+    }
 }
