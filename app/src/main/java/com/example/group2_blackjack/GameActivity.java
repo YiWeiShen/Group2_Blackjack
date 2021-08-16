@@ -210,6 +210,9 @@ public class GameActivity extends AppCompatActivity {
                 Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
                 flag = true;
             }
+        } else if (currentPoint == computerPoint){
+            Toast.makeText(GameActivity.this, "YOU LOST", Toast.LENGTH_SHORT).show();
+            flag = false;
         }
         startButton.setClickable(true);
         startButton.setAlpha(1.00f);
