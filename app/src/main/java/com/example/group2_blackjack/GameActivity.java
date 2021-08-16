@@ -135,40 +135,38 @@ public class GameActivity extends AppCompatActivity {
     private void show() {
         if (player == 0) {
             for (int i = 0; i < user.size(); i++) {
-                switch(i)
-                {
-                    case 0 :
+                switch (i) {
+                    case 0:
                         userCard1.setImageResource(cardArray[user.get(0)]);
                         break;
-                    case 1 :
+                    case 1:
                         userCard2.setImageResource(cardArray[user.get(1)]);
-                    case 2 :
+                    case 2:
                         userCard3.setImageResource(cardArray[user.get(2)]);
                         break;
-                    case 3 :
+                    case 3:
                         userCard4.setImageResource(cardArray[user.get(3)]);
                         break;
-                    case 4 :
+                    case 4:
                         userCard5.setImageResource(cardArray[user.get(4)]);
                         break;
                 }
             }
         } else {
             for (int i = 0; i < ai.size(); i++) {
-                switch(i)
-                {
-                    case 0 :
+                switch (i) {
+                    case 0:
                         aiCard1.setImageResource(cardArray[ai.get(0)]);
                         break;
-                    case 1 :
+                    case 1:
                         aiCard2.setImageResource(cardArray[ai.get(1)]);
-                    case 2 :
+                    case 2:
                         aiCard3.setImageResource(cardArray[ai.get(2)]);
                         break;
-                    case 3 :
+                    case 3:
                         aiCard4.setImageResource(cardArray[ai.get(3)]);
                         break;
-                    case 4 :
+                    case 4:
                         aiCard5.setImageResource(cardArray[ai.get(4)]);
                         break;
                 }
@@ -200,11 +198,6 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
-    }
-
-    private void start() {
-        shuffle();
-        deal();
     }
 
     private void userTurn() {
@@ -250,14 +243,14 @@ public class GameActivity extends AppCompatActivity {
         aiCard4 = findViewById(R.id.dealer_card4);
         aiCard5 = findViewById(R.id.dealer_card5);
 
-
-
         startButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 shuffle();
                 deal();
+                startButton.setClickable(false);
+                startButton.setAlpha(0.25f);
             }
         });
 
