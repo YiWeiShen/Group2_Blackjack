@@ -134,17 +134,45 @@ public class GameActivity extends AppCompatActivity {
 
     private void show() {
         if (player == 0) {
-            userCard1.setImageResource(cardArray[user.get(0)]);
-            userCard2.setImageResource(cardArray[user.get(1)]);
-            userCard3.setImageResource(cardArray[user.get(2)]);
-            userCard4.setImageResource(cardArray[user.get(3)]);
-            userCard5.setImageResource(cardArray[user.get(4)]);
+            for (int i = 0; i < user.size(); i++) {
+                switch(i)
+                {
+                    case 0 :
+                        userCard1.setImageResource(cardArray[user.get(0)]);
+                        break;
+                    case 1 :
+                        userCard2.setImageResource(cardArray[user.get(1)]);
+                    case 2 :
+                        userCard3.setImageResource(cardArray[user.get(2)]);
+                        break;
+                    case 3 :
+                        userCard4.setImageResource(cardArray[user.get(3)]);
+                        break;
+                    case 4 :
+                        userCard5.setImageResource(cardArray[user.get(4)]);
+                        break;
+                }
+            }
         } else {
-            aiCard1.setImageResource(cardArray[ai.get(0)]);
-            aiCard2.setImageResource(cardArray[ai.get(1)]);
-            aiCard3.setImageResource(cardArray[ai.get(2)]);
-            aiCard4.setImageResource(cardArray[ai.get(3)]);
-            aiCard5.setImageResource(cardArray[ai.get(4)]);
+            for (int i = 0; i < ai.size(); i++) {
+                switch(i)
+                {
+                    case 0 :
+                        aiCard1.setImageResource(cardArray[ai.get(0)]);
+                        break;
+                    case 1 :
+                        aiCard2.setImageResource(cardArray[ai.get(1)]);
+                    case 2 :
+                        aiCard3.setImageResource(cardArray[ai.get(2)]);
+                        break;
+                    case 3 :
+                        aiCard4.setImageResource(cardArray[ai.get(3)]);
+                        break;
+                    case 4 :
+                        aiCard5.setImageResource(cardArray[ai.get(4)]);
+                        break;
+                }
+            }
         }
 
     }
