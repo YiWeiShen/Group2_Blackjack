@@ -24,7 +24,7 @@ public class GameActivity extends AppCompatActivity {
     private int currentPoint;
     private int computerPoint = 0;
     private int currentPage = 0;
-    int [] cardArray ={
+    int[] cardArray = {
             R.drawable.spade1,
             R.drawable.spade2,
             R.drawable.spade3,
@@ -131,13 +131,13 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void show() {
-        if(player==0){
+        if (player == 0) {
             userCard1.setImageResource(cardArray[user.get(0)]);
             userCard2.setImageResource(cardArray[user.get(1)]);
             userCard3.setImageResource(cardArray[user.get(2)]);
             userCard4.setImageResource(cardArray[user.get(3)]);
             userCard5.setImageResource(cardArray[user.get(4)]);
-        }else {
+        } else {
             aiCard1.setImageResource(cardArray[ai.get(0)]);
             aiCard2.setImageResource(cardArray[ai.get(1)]);
             aiCard3.setImageResource(cardArray[ai.get(2)]);
@@ -148,7 +148,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void result() {
-        if (currentPoint == 21 || user.size()==5) {
+        if (currentPoint == 21 || user.size() == 5) {
             Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
         } else if (computerPoint > currentPoint) {
             if (computerPoint > 21) {
@@ -157,7 +157,7 @@ public class GameActivity extends AppCompatActivity {
                 Toast.makeText(GameActivity.this, "YOU LOST", Toast.LENGTH_SHORT).show();
             }
         } else if (currentPoint > computerPoint) {
-            if (currentPoint > 21 || ai.size()==5) {
+            if (currentPoint > 21 || ai.size() == 5) {
                 Toast.makeText(GameActivity.this, "YOU LOST", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
