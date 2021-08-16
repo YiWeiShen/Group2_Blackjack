@@ -184,9 +184,11 @@ public class GameActivity extends AppCompatActivity {
 //        String dobTxt = dob.getText().toString();
 
 //        Boolean checkupdate = DB.updateuserdata(nameTxt,contactTxt,dobTxt);
-        if (currentPoint == 21 || user.size() == 5) {
+        if (currentPoint == 21) {
             Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
-        } else if (computerPoint > currentPoint) {
+        }else if (currentPoint <21 && user.size() == 5) {
+            Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
+        }else if (computerPoint > currentPoint) {
             if (computerPoint > 21) {
                 Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
             } else {
