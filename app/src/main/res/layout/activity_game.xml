@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_heightPercent="10%"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <TextView
@@ -20,14 +20,14 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Dealer"
-            android:textSize="20sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        app:layout_heightPercent="35%"
+        android:layout_weight="2"
         android:orientation="horizontal">
 
         <ImageView
@@ -70,7 +70,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        app:layout_heightPercent="35%"
+        android:layout_weight="2"
         android:orientation="horizontal">
 
         <ImageView
@@ -112,13 +112,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_heightPercent="20%"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_heightPercent="50%"
             android:orientation="horizontal">
 
             <TextView
@@ -127,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView"
-                android:textSize="20sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/balance_ingame"
@@ -135,13 +134,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView"
-                android:textSize="20sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_heightPercent="50%"
             android:orientation="horizontal">
 
             <Button
