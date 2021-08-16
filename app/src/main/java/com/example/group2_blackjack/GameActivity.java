@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -16,6 +17,8 @@ public class GameActivity extends AppCompatActivity {
 
     ImageView userCard1, userCard2, userCard3, userCard4, userCard5, aiCard1, aiCard2, aiCard3, aiCard4, aiCard5;
     Button startButton, needButton, stopButton;
+
+
 
     private int player = 0;
     private int bet = 0;
@@ -206,5 +209,47 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_game);
+
+        startButton = findViewById(R.id.button);
+        needButton = findViewById(R.id.button2);
+        stopButton = findViewById(R.id.button3);
+
+        userCard1 = findViewById(R.id.player_card1);
+        userCard2 = findViewById(R.id.player_card2);
+        userCard3 = findViewById(R.id.player_card3);
+        userCard4 = findViewById(R.id.player_card4);
+        userCard5 = findViewById(R.id.player_card5);
+        aiCard1 = findViewById(R.id.dealer_card1);
+        aiCard2 = findViewById(R.id.dealer_card2);
+        aiCard3 = findViewById(R.id.dealer_card3);
+        aiCard4 = findViewById(R.id.dealer_card4);
+        aiCard5 = findViewById(R.id.dealer_card5);
+
+        startButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                shuffle();
+                deal();
+            }
+        });
+
+        needButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                userTurn();
+            }
+        });
+
+        stopButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                aiTurn();
+            }
+        });
+
+
     }
 }
