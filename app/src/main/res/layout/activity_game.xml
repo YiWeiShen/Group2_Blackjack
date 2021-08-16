@@ -205,14 +205,15 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="2"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
@@ -224,7 +225,7 @@
 
             <Button
                 android:id="@+id/button1"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
@@ -235,10 +236,10 @@
 
             <Button
                 android:id="@+id/button2"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:text="@string/btn_stand"
@@ -246,10 +247,10 @@
 
             <Button
                 android:id="@+id/btn_double"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:text="@string/btn_double"
@@ -259,8 +260,10 @@
                 android:id="@+id/btn_ranking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
                 android:text="@string/btn_ranking"
                 app:backgroundTint="#03A9F4" />
         </LinearLayout>
