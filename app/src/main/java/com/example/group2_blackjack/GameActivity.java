@@ -25,6 +25,7 @@ public class GameActivity extends AppCompatActivity {
     private int currentPoint;
     private int computerPoint = 0;
     private int currentPage = 0;
+    int cardBack = R.drawable.cardback;
     int[] cardArray = {
             R.drawable.spade1,
             R.drawable.spade2,
@@ -103,7 +104,7 @@ public class GameActivity extends AppCompatActivity {
         user.add(num[2]);
         userCard2.setImageResource(cardArray[num[2]]);
         ai.add(num[3]);
-        aiCard2.setImageResource(cardArray[num[3]]);
+        aiCard2.setImageResource(cardBack);
         currentPage = 4;
     }
 
@@ -175,6 +176,9 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void result() {
+        user.clear();
+        ai.clear();
+        currentPage = 0;
 
 //        String nameTxt = name.getText().toString();
 //        String contactTxt = contact.getText().toString();
@@ -198,13 +202,15 @@ public class GameActivity extends AppCompatActivity {
                 Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
             }
         }
+        startButton.setClickable(true);
+        startButton.setAlpha(1.00f);
 
     }
 
     private void userTurn() {
         user = needCard(user);
         show();
-        if (currentPoint >= 21) {
+        if (currentPoint >= 21 || user.size() == 5) {
             result();
         }
     }
@@ -212,7 +218,7 @@ public class GameActivity extends AppCompatActivity {
     private void aiTurn() {
         player = 1;
         while (true) {
-            if (computerPoint > currentPoint) {
+            if (computerPoint > currentPoint || user.size() == 5) {
                 break;
             } else if (computerPoint > 21) {
                 break;
@@ -248,6 +254,16 @@ public class GameActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                userCard1.setImageDrawable(null);
+                userCard2.setImageDrawable(null);
+                userCard3.setImageDrawable(null);
+                userCard4.setImageDrawable(null);
+                userCard5.setImageDrawable(null);
+                aiCard1.setImageDrawable(null);
+                aiCard2.setImageDrawable(null);
+                aiCard3.setImageDrawable(null);
+                aiCard4.setImageDrawable(null);
+                aiCard5.setImageDrawable(null);
                 shuffle();
                 deal();
                 startButton.setClickable(false);
