@@ -74,21 +74,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return false;
     }
 
-    // do we need delete player?
-    public Boolean deleteuserdata(String name) {
-        SQLiteDatabase DB = this.getWritableDatabase();
-
-        Cursor cursor = DB.rawQuery("Select * from Userdetails where name = ?", new String[]{name});
-
-        if (cursor.getCount() > 0) {
-            long result = DB.delete("Userdetails", "name=?", new String[]{name});
-
-
-            return result != -1;
-        }
-        return false;
-    }
-
     public Cursor getdata() {
         SQLiteDatabase DB = this.getWritableDatabase();
         Cursor cursor = DB.rawQuery("Select * from Userdetails", null);
