@@ -18,6 +18,7 @@ public class GameActivity extends AppCompatActivity {
     Button startButton, needButton, stopButton;
 
     private int player = 0;
+    private int bet = 0;
     private int[] num = new int[52];
     private ArrayList<Integer> user = new ArrayList<Integer>();
     private ArrayList<Integer> ai = new ArrayList<Integer>();
@@ -148,6 +149,12 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void result() {
+
+//        String nameTxt = name.getText().toString();
+//        String contactTxt = contact.getText().toString();
+//        String dobTxt = dob.getText().toString();
+
+//        Boolean checkupdate = DB.updateuserdata(nameTxt,contactTxt,dobTxt);
         if (currentPoint == 21 || user.size()==5) {
             Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
         } else if (computerPoint > currentPoint) {
