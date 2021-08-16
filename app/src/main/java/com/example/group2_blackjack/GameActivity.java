@@ -308,15 +308,29 @@ public class GameActivity extends AppCompatActivity {
                 userTurn();
                 if(endflag){
                     if(result()){
-                        String name = username_txt.getText().toString();
+                        String name = user.getUsername();
+                        String password = user.getPassword();
                         int balance = user.getBalance() + bet;
                         int score = user.getScore() + bet;
-                        DB.updateUserData(name, balance, score);
+                        Boolean checkupdate = DB.updateUserData( name, password, balance, score);
+                        if(checkupdate){
+                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
+                        }
                     }else {
-                        String name = username_txt.getText().toString();
+                        String name = user.getUsername();
+                        String password = user.getPassword();
                         int balance = user.getBalance() - bet;
                         int score = user.getScore();
-                        DB.updateUserData(name, balance, score);
+                        Boolean checkupdate = DB.updateUserData( name, password, balance, score);
+                        if(checkupdate){
+                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }
@@ -330,15 +344,29 @@ public class GameActivity extends AppCompatActivity {
                 aiTurn();
                 if(endflag){
                     if(result()){
-                        String name = username_txt.getText().toString();
+                        String name = user.getUsername();
+                        String password = user.getPassword();
                         int balance = user.getBalance() + bet;
                         int score = user.getScore() + bet;
-                        DB.updateUserData(name, balance, score);
+                        Boolean checkupdate = DB.updateUserData( name, password, balance, score);
+                        if(checkupdate){
+                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
+                        }
                     }else {
-                        String name = username_txt.getText().toString();
+                        String name = user.getUsername();
+                        String password = user.getPassword();
                         int balance = user.getBalance() - bet;
                         int score = user.getScore();
-                        DB.updateUserData(name, balance, score);
+                        Boolean checkupdate = DB.updateUserData( name, password, balance, score);
+                        if(checkupdate){
+                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }
