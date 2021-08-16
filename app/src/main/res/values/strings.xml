@@ -11,7 +11,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="play_now">Play As a Guest</string>
-    <string name="username_label">Username</string>
+    <string name="username_label">Username: </string>
     <string name="username_hint">Enter username..</string>
     <string name="pw_label">Password</string>
     <string name="pw_hint">Enter password..</string>
@@ -33,4 +33,5 @@
     <string name="bet">Bet: </string>
     <string name="player">Player: </string>
     <string name="Balance">Balance: </string>
+    <string name="Score">Score: </string>
 </resources>

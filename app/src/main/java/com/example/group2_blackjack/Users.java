@@ -55,4 +55,12 @@ public class Users implements Serializable {
         this.score = score;
     }
 
+    public String toString() {
+        return "Users " +
+                ", name='" + username + '\n' +
+                ", balance='" + balance + '\n' +
+                ", score=" + score + '\n'+
+                '}';
+    }
+
 }

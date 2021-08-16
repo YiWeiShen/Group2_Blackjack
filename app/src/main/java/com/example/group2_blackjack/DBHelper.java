@@ -109,4 +109,12 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return null;
     }
+
+    public Cursor getdata(){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        Cursor cursor = DB.rawQuery("Select username, balance, score from Userdetails order by score DESC", null) ;
+
+        return cursor;
+
+    }
 }

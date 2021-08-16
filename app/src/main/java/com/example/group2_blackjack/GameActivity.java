@@ -3,6 +3,8 @@ package com.example.group2_blackjack;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,13 +19,15 @@ public class GameActivity extends AppCompatActivity {
 
     ImageView userCard1, userCard2, userCard3, userCard4, userCard5, aiCard1, aiCard2, aiCard3, aiCard4, aiCard5;
     Button startButton, needButton, stopButton, coin10, coin20, coin50, coin100, clearButton, doubleButton, rankingButton;
-    TextView bet_txt, username_txt, balance_txt;
+    TextView bet_txt, username_txt, balance_txt, score_txt;
 
+    ArrayList<Users> userList;
     private DBHelper DB;
+    private boolean endflag = false;
     private int player = 0;
     private int bet = 0;
     private int[] num = new int[52];
-    private ArrayList<Integer> user = new ArrayList<Integer>();
+    private ArrayList<Integer> userCards = new ArrayList<Integer>();
     private ArrayList<Integer> ai = new ArrayList<Integer>();
     private int currentPoint;
     private int computerPoint = 0;
@@ -100,11 +104,11 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void deal() {
-        user.add(num[0]);
+        userCards.add(num[0]);
         userCard1.setImageResource(cardArray[num[0]]);
         ai.add(num[1]);
         aiCard1.setImageResource(cardArray[num[1]]);
-        user.add(num[2]);
+        userCards.add(num[2]);
         userCard2.setImageResource(cardArray[num[2]]);
         ai.add(num[3]);
         aiCard2.setImageResource(cardBack);
@@ -137,21 +141,21 @@ public class GameActivity extends AppCompatActivity {
 
     private void show() {
         if (player == 0) {
-            for (int i = 0; i < user.size(); i++) {
+            for (int i = 0; i < userCards.size(); i++) {
                 switch (i) {
                     case 0:
-                        userCard1.setImageResource(cardArray[user.get(0)]);
+                        userCard1.setImageResource(cardArray[userCards.get(0)]);
                         break;
                     case 1:
-                        userCard2.setImageResource(cardArray[user.get(1)]);
+                        userCard2.setImageResource(cardArray[userCards.get(1)]);
                     case 2:
-                        userCard3.setImageResource(cardArray[user.get(2)]);
+                        userCard3.setImageResource(cardArray[userCards.get(2)]);
                         break;
                     case 3:
-                        userCard4.setImageResource(cardArray[user.get(3)]);
+                        userCard4.setImageResource(cardArray[userCards.get(3)]);
                         break;
                     case 4:
-                        userCard5.setImageResource(cardArray[user.get(4)]);
+                        userCard5.setImageResource(cardArray[userCards.get(4)]);
                         break;
                 }
             }
@@ -178,42 +182,46 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private void result() {
-        user.clear();
+    private boolean result() {
+        boolean flag = true;
+        userCards.clear();
         ai.clear();
         currentPage = 0;
 
-//        String nameTxt = name.getText().toString();
-//        String contactTxt = contact.getText().toString();
-//        String dobTxt = dob.getText().toString();
-
-//        Boolean checkupdate = DB.updateuserdata(nameTxt,contactTxt,dobTxt);
         if (currentPoint == 21) {
             Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
-        }else if (currentPoint <21 && user.size() == 5) {
+            flag = true;
+        }else if (currentPoint <21 && userCards.size() == 5) {
             Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
+            flag = true;
         }else if (computerPoint > currentPoint) {
             if (computerPoint > 21) {
                 Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
+                flag = true;
             } else {
                 Toast.makeText(GameActivity.this, "YOU LOST", Toast.LENGTH_SHORT).show();
+                flag = false;
             }
         } else if (currentPoint > computerPoint) {
             if (currentPoint > 21 || ai.size() == 5) {
                 Toast.makeText(GameActivity.this, "YOU LOST", Toast.LENGTH_SHORT).show();
+                flag = false;
             } else {
                 Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
+                flag = true;
             }
         }
         startButton.setClickable(true);
         startButton.setAlpha(1.00f);
+        endflag = true;
+        return flag;
 
     }
 
     private void userTurn() {
-        user = needCard(user);
+        userCards = needCard(userCards);
         show();
-        if (currentPoint >= 21 || user.size() == 5) {
+        if (currentPoint >= 21 || userCards.size() == 5) {
             result();
         }
     }
@@ -221,7 +229,7 @@ public class GameActivity extends AppCompatActivity {
     private void aiTurn() {
         player = 1;
         while (true) {
-            if (computerPoint > currentPoint || user.size() == 5) {
+            if (computerPoint > currentPoint || userCards.size() == 5) {
                 break;
             } else if (computerPoint > 21) {
                 break;
@@ -254,9 +262,11 @@ public class GameActivity extends AppCompatActivity {
         bet_txt = findViewById((R.id.bet));
         username_txt = findViewById(R.id.username_ingame);
         balance_txt = findViewById(R.id.balance_ingame);
+        score_txt = findViewById(R.id.score);
 
         username_txt.setText("User: "+ user.getUsername());
         balance_txt.setText("Balance: "+user.getBalance());
+        score_txt.setText("Score: "+user.getScore());
 
         userCard1 = findViewById(R.id.player_card1);
         userCard2 = findViewById(R.id.player_card2);
@@ -294,7 +304,21 @@ public class GameActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+
                 userTurn();
+                if(endflag){
+                    if(result()){
+                        String name = username_txt.getText().toString();
+                        int balance = user.getBalance() + bet;
+                        int score = user.getScore() + bet;
+                        DB.updateUserData(name, balance, score);
+                    }else {
+                        String name = username_txt.getText().toString();
+                        int balance = user.getBalance() - bet;
+                        int score = user.getScore();
+                        DB.updateUserData(name, balance, score);
+                    }
+                }
             }
         });
 
@@ -302,7 +326,21 @@ public class GameActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+
                 aiTurn();
+                if(endflag){
+                    if(result()){
+                        String name = username_txt.getText().toString();
+                        int balance = user.getBalance() + bet;
+                        int score = user.getScore() + bet;
+                        DB.updateUserData(name, balance, score);
+                    }else {
+                        String name = username_txt.getText().toString();
+                        int balance = user.getBalance() - bet;
+                        int score = user.getScore();
+                        DB.updateUserData(name, balance, score);
+                    }
+                }
             }
         });
 
@@ -361,6 +399,31 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        rankingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Cursor res = DB.getdata();
+                if(res.getCount() == 0){
+                    Toast.makeText(GameActivity.this, "Nothing existed!", Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    userList = new ArrayList<>();
+                    Users user;
+                    while(res.moveToNext()){
+                        user = new Users(res.getString(0),"hide",res.getInt(1),res.getInt(2));
+                        userList.add(user);
+
+
+
+                    }
+                    Intent intent = new Intent(GameActivity.this,RankingActivity.class);
+                    intent.putExtra("userlist", userList);
+                    startActivity(intent);
+
+                }
+            }
+        });
 
     }
 }
