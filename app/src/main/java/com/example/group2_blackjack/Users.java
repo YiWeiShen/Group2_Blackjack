@@ -9,14 +9,14 @@ public class Users implements Serializable {
     private int balance;
     private int score;
 
-    public Users(String username, String password, int balance, int score){
+    public Users(String username, String password, int balance, int score) {
         this.username = username;
         this.password = password;
         this.balance = balance;
         this.score = score;
     }
 
-    public Users(String username, String password){
+    public Users(String username, String password) {
         this.username = username;
         this.password = password;
         this.balance = 1000;
