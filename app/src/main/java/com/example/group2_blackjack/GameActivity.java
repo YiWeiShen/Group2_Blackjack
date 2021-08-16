@@ -3,6 +3,7 @@ package com.example.group2_blackjack;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -15,7 +16,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends Activity {
 
     ImageView userCard1, userCard2, userCard3, userCard4, userCard5, aiCard1, aiCard2, aiCard3, aiCard4, aiCard5;
     Button startButton, needButton, stopButton, coin10, coin20, coin50, coin100, clearButton, doubleButton, rankingButton;
@@ -286,16 +287,7 @@ public class GameActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                userCard1.setImageDrawable(null);
-                userCard2.setImageDrawable(null);
-                userCard3.setImageDrawable(null);
-                userCard4.setImageDrawable(null);
-                userCard5.setImageDrawable(null);
-                aiCard1.setImageDrawable(null);
-                aiCard2.setImageDrawable(null);
-                aiCard3.setImageDrawable(null);
-                aiCard4.setImageDrawable(null);
-                aiCard5.setImageDrawable(null);
+                onCreate(null);
                 shuffle();
                 deal();
                 startButton.setClickable(false);
