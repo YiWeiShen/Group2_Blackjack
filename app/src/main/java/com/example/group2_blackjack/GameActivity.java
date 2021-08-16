@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -84,7 +85,7 @@ public class GameActivity extends AppCompatActivity {
         for (int i = 0; i < 52; i++) {
             num[i] = i;
         }
-        for (int j = 0; j < 26; j++) {
+        for (int j = 0; j < 100; j++) {
             Random r = new Random();
             int i1 = r.nextInt(52);
             int i2 = r.nextInt(52);
@@ -221,17 +222,14 @@ public class GameActivity extends AppCompatActivity {
         aiCard4 = findViewById(R.id.dealer_card4);
         aiCard5 = findViewById(R.id.dealer_card5);
 
+
+
         startButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 shuffle();
-                userCard1.setImageResource(cardArray[num[0]]);
-                userCard2.setImageResource(cardArray[num[1]]);
-                userCard3.setImageResource(cardArray[num[2]]);
-                userCard4.setImageResource(cardArray[num[3]]);
-                userCard5.setImageResource(cardArray[num[4]]);
-
+                deal();
             }
         });
 
