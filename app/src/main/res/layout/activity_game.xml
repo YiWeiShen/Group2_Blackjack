@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        app:layout_heightPercent="10%"
         android:orientation="horizontal">
 
         <TextView
@@ -27,7 +27,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_weight="2"
+        app:layout_heightPercent="35%"
         android:orientation="horizontal">
 
         <ImageView
@@ -70,7 +70,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_weight="2"
+        app:layout_heightPercent="35%"
         android:orientation="horizontal">
 
         <ImageView
@@ -112,12 +112,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        app:layout_heightPercent="20%"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_heightPercent="50%"
             android:orientation="horizontal">
 
             <TextView
@@ -140,6 +141,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_heightPercent="50%"
             android:orientation="horizontal">
 
             <Button
