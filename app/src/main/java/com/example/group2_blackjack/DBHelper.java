@@ -19,7 +19,6 @@ public class DBHelper extends SQLiteOpenHelper {
      * {@link #getReadableDatabase} is called.
      *
      * @param context to use for locating paths to the the database
-
      */
     public DBHelper(@Nullable Context context) {
         super(context, "Userdata.db", null, 1);
@@ -45,43 +44,43 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("drop Table if exists Userdetails");
     }
 
-//    create new player
-    public Boolean insertuserdata(String username, String password){
+    //    create new player
+    public Boolean insertuserdata(String username, String password) {
 
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValue = new ContentValues(); // keep things in pair
         // (Coloum, value)
-        contentValue.put("username",username);
+        contentValue.put("username", username);
         contentValue.put("password", password);
         contentValue.put("balance", 1000); // initial balance 1000
         contentValue.put("score", 0);  // initial score 0
-        long result = DB.insert("Userdetails",null,contentValue);
+        long result = DB.insert("Userdetails", null, contentValue);
 
         return result != -1;
 
     }
 
-    public Boolean updateuserdata(String name, Integer balance, Integer score ){
+    public Boolean updateuserdata(String name, Integer balance, Integer score) {
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValue = new ContentValues(); // keep things in pair
         contentValue.put("balance", balance);
         contentValue.put("score", score);
         Cursor cursor = DB.rawQuery("Select * from Userdetails where name = ?", new String[]{name});
 
-        if(cursor.getCount()>0){
-            long result = DB.update("Userdetails",contentValue, "name=?", new String[]{name});
+        if (cursor.getCount() > 0) {
+            long result = DB.update("Userdetails", contentValue, "name=?", new String[]{name});
             return result != -1;
         }
         return false;
     }
 
     // do we need delete player?
-    public Boolean deleteuserdata(String name){
+    public Boolean deleteuserdata(String name) {
         SQLiteDatabase DB = this.getWritableDatabase();
 
         Cursor cursor = DB.rawQuery("Select * from Userdetails where name = ?", new String[]{name});
 
-        if(cursor.getCount()>0){
+        if (cursor.getCount() > 0) {
             long result = DB.delete("Userdetails", "name=?", new String[]{name});
 
 
@@ -90,9 +89,9 @@ public class DBHelper extends SQLiteOpenHelper {
         return false;
     }
 
-    public Cursor getdata(){
+    public Cursor getdata() {
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from Userdetails", null) ;
+        Cursor cursor = DB.rawQuery("Select * from Userdetails", null);
 
         return cursor;
 
