@@ -230,7 +230,12 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 shuffle();
-                deal();
+                userCard1.setImageResource(cardArray[num[0]]);
+                userCard2.setImageResource(cardArray[num[1]]);
+                userCard3.setImageResource(cardArray[num[2]]);
+                userCard4.setImageResource(cardArray[num[3]]);
+                userCard5.setImageResource(cardArray[num[4]]);
+
             }
         });
 
