@@ -8,7 +8,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#4CAF50">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,14 +21,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:fontFamily="sans-serif-black"
-                android:gravity="center"
+                android:gravity="bottom|center"
                 android:text="@string/register_title"
-                android:textSize="24sp" />
+                android:textSize="34sp" />
 
             <TextView
                 android:id="@+id/username_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:gravity="bottom"
                 android:minHeight="40dp"
                 android:text="@string/username_label"
                 android:textSize="20sp" />
@@ -36,6 +39,7 @@
                 android:id="@+id/username_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
                 android:ems="10"
                 android:hint="@string/username_hint"
                 android:importantForAutofill="no"
@@ -47,6 +51,8 @@
                 android:id="@+id/password_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:gravity="bottom"
                 android:minHeight="40dp"
                 android:text="@string/pw_label"
                 android:textSize="20sp" />
@@ -55,6 +61,7 @@
                 android:id="@+id/password_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
                 android:ems="10"
                 android:hint="@string/pw_hint"
                 android:importantForAutofill="no"
@@ -67,6 +74,8 @@
                 android:id="@+id/password_confirm_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:gravity="bottom"
                 android:minHeight="40dp"
                 android:text="@string/pw_confirm_label"
                 android:textSize="20sp" />
@@ -75,6 +84,7 @@
                 android:id="@+id/password_confirm_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
                 android:ems="10"
                 android:hint="@string/pw_confirm_hint"
                 android:importantForAutofill="no"
@@ -85,14 +95,14 @@
 
             <Button
                 android:id="@+id/submit_btn"
-                android:layout_width="140dp"
-                android:layout_height="70dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/submit_btn"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:backgroundTint="@color/design_default_color_error" />
+                app:backgroundTint="#00BCD4" />
 
         </LinearLayout>
     </ScrollView>

@@ -19,7 +19,6 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_register);
 
         username = findViewById(R.id.username_txt);
@@ -39,12 +38,12 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (passwordTxt.equals(password2Txt)) {
                     Boolean checkinsertData = DB.insertuserdata(usernameTxt, passwordTxt);
-                    Intent intent = new Intent(RegisterActivity.this, GameActivity.class);
-                    intent.putExtra("username", usernameTxt);
-                    startActivity(intent);
-
                     if (!checkinsertData) {
                         Toast.makeText(RegisterActivity.this, "Username has been registered!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = new Intent(RegisterActivity.this, GameActivity.class);
+                        intent.putExtra("username", usernameTxt);
+                        startActivity(intent);
                     }
                 } else {
                     Toast.makeText(RegisterActivity.this, "Password have to be the same!", Toast.LENGTH_SHORT).show();
