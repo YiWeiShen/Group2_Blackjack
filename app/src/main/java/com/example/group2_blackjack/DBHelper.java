@@ -32,7 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("create Table Userdetails(name Text primary key, contact Text, dob Text)");
+        db.execSQL("create Table Userdetails(username Text primary key, password Text, balance Integer, score Integer)");
 
     }
 
@@ -43,7 +43,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //    create new player
-    public Boolean insertuserdata(String username, String password) {
+    public Boolean insertUserData(String username, String password) {
 
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValue = new ContentValues(); // keep things in pair
@@ -58,12 +58,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public Boolean updateuserdata(String username, Integer balance, Integer score) {
+    public Boolean updateUserData(String username, Integer balance, Integer score) {
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValue = new ContentValues(); // keep things in pair
         contentValue.put("balance", balance);
         contentValue.put("score", score);
-        Cursor cursor = DB.rawQuery("Select * from Userdetails where username = ?", new String[]{username});
+        Cursor cursor = DB.rawQuery("Select * from Userdetails where username=?", new String[]{username});
 
         if (cursor.getCount() > 0) {
             long result = DB.update("Userdetails", contentValue, "username=?", new String[]{username});
@@ -89,7 +89,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValue.put("password", "guest");
         contentValue.put("balance", 1000); // initial balance 1000
         contentValue.put("score", 0);  // initial score 0
-        Cursor cursor = DB.rawQuery("Select * from Userdetails where username = ?", new String[]{"guest"});
+        Cursor cursor = DB.rawQuery("Select * from Userdetails where username=?", new String[]{"guest"});
 
         // check if guest already exists, if yes, delete it, before create a new guest account
         if (cursor.getCount() > 0) {

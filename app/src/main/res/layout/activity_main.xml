@@ -41,16 +41,6 @@
                     android:orientation="vertical">
 
                     <EditText
-                        android:id="@+id/login_passwordInput"
-                        android:layout_width="246dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:ems="10"
-                        android:hint="Enter your password"
-                        android:inputType="textPassword"
-                        android:minHeight="48dp" />
-
-                    <EditText
                         android:id="@+id/login_nameInput"
                         android:layout_width="246dp"
                         android:layout_height="wrap_content"
@@ -58,6 +48,16 @@
                         android:ems="10"
                         android:hint="Enter your username"
                         android:inputType="textPersonName"
+                        android:minHeight="48dp" />
+
+                    <EditText
+                        android:id="@+id/login_passwordInput"
+                        android:layout_width="246dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:ems="10"
+                        android:hint="Enter your password"
+                        android:inputType="textPassword"
                         android:minHeight="48dp" />
 
                     <Button

@@ -37,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String password2Txt = password2.getText().toString();
 
                 if (passwordTxt.equals(password2Txt)) {
-                    Boolean checkinsertData = DB.insertuserdata(usernameTxt, passwordTxt);
+                    Boolean checkinsertData = DB.insertUserData(usernameTxt, passwordTxt);
                     if (!checkinsertData) {
                         Toast.makeText(RegisterActivity.this, "Username has been registered!", Toast.LENGTH_SHORT).show();
                     } else {
