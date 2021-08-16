@@ -23,4 +23,14 @@
     <string name="btn_deal">Deal</string>
     <string name="btn_hit">Hit</string>
     <string name="btn_stand">Stand</string>
+    <string name="coin_10">$10</string>
+    <string name="coin_20">$20</string>
+    <string name="coin_50">$50</string>
+    <string name="coin_100">$100</string>
+    <string name="btn_ranking">Ranking</string>
+    <string name="btn_double">Double</string>
+    <string name="btn_clear">Clear</string>
+    <string name="bet">Bet: </string>
+    <string name="player">Player: </string>
+    <string name="Balance">Balance: </string>
 </resources>

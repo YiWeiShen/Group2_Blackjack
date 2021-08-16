@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -231,8 +230,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         startButton = findViewById(R.id.button);
-        needButton = findViewById(R.id.button2);
-        stopButton = findViewById(R.id.button3);
+        needButton = findViewById(R.id.button1);
+        stopButton = findViewById(R.id.button2);
 
         userCard1 = findViewById(R.id.player_card1);
         userCard2 = findViewById(R.id.player_card2);
