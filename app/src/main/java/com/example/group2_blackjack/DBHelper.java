@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-
     /**
      * Create a helper object to create, open, and/or manage a database.
      * This method always returns very quickly.  The database is not actually
@@ -37,7 +36,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
@@ -60,25 +58,43 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public Boolean updateuserdata(String name, Integer balance, Integer score) {
+    public Boolean updateuserdata(String username, Integer balance, Integer score) {
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValue = new ContentValues(); // keep things in pair
         contentValue.put("balance", balance);
         contentValue.put("score", score);
-        Cursor cursor = DB.rawQuery("Select * from Userdetails where name = ?", new String[]{name});
+        Cursor cursor = DB.rawQuery("Select * from Userdetails where username = ?", new String[]{username});
 
         if (cursor.getCount() > 0) {
-            long result = DB.update("Userdetails", contentValue, "name=?", new String[]{name});
+            long result = DB.update("Userdetails", contentValue, "username=?", new String[]{username});
             return result != -1;
         }
         return false;
     }
 
-    public Cursor getdata() {
+    public Boolean loginCheck(String username, String password) {
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from Userdetails", null);
+        Cursor cursor = DB.rawQuery("Select * from Userdetails where username=? and password=?", new String[]{username, password});
 
-        return cursor;
+        if (cursor.getCount() > 0) {
+            return true;
+        }
+        return false;
+    }
 
+    public void guestLogin() {
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues contentValue = new ContentValues();
+        contentValue.put("username", "guest");
+        contentValue.put("password", "guest");
+        contentValue.put("balance", 1000); // initial balance 1000
+        contentValue.put("score", 0);  // initial score 0
+        Cursor cursor = DB.rawQuery("Select * from Userdetails where username = ?", new String[]{"guest"});
+
+        // check if guest already exists, if yes, delete it, before create a new guest account
+        if (cursor.getCount() > 0) {
+            DB.delete("Userdetails", "username=?", new String[]{"guest"});
+        }
+        DB.insert("Userdetails", null, contentValue);
     }
 }

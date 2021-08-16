@@ -16,7 +16,7 @@
     <string name="pw_label">Password</string>
     <string name="pw_hint">Enter password..</string>
     <string name="pw_confirm_label">Confirm password</string>
-    <string name="pw_confirm_hint">Enter password..</string>
+    <string name="pw_confirm_hint">Enter password again..</string>
     <string name="register_title">REGISTER</string>
     <string name="login_title">LOGIN</string>
     <string name="submit_btn">SUBMIT</string>

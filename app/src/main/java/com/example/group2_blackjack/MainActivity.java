@@ -6,10 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     Button reg_btn, login_btn, guest_btn;
+    EditText login_passwordInput, login_nameInput;
+    private DBHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
         reg_btn = findViewById(R.id.reg_btn);
         login_btn = findViewById(R.id.login_btn);
         guest_btn = findViewById(R.id.guest_btn);
+        login_passwordInput = findViewById(R.id.login_passwordInput);
+        login_nameInput = findViewById(R.id.login_nameInput);
+
+        DB = new DBHelper(this);
 
         reg_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,14 +38,26 @@ public class MainActivity extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+                String username = login_nameInput.getText().toString();
+                String password = login_passwordInput.getText().toString();
+
+                if (DB.loginCheck(username, password)) {
+                    Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                    intent.putExtra("username", username);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MainActivity.this, "LOGIN Failed!!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         guest_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+                DB.guestLogin();
+                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                intent.putExtra("username", "guest");
+                startActivity(intent);
             }
         });
     }
