@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#4CAF50"
     android:orientation="vertical"
     tools:context=".GameActivity">
 
@@ -27,6 +28,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_margin="1dp"
         android:layout_weight="2"
         android:orientation="horizontal">
 
@@ -70,6 +72,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_margin="1dp"
         android:layout_weight="2"
         android:orientation="horizontal">
 
@@ -146,25 +149,35 @@
                 android:id="@+id/button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:clickable="false"
+                android:text="@string/btn_deal"
+                app:backgroundTint="#03A9F4" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="@string/btn_hit"
+                app:backgroundTint="#03A9F4" />
 
             <Button
                 android:id="@+id/button3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="@string/btn_stand"
+                app:backgroundTint="#03A9F4" />
         </LinearLayout>
     </LinearLayout>
 

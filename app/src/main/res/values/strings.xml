@@ -20,4 +20,7 @@
     <string name="register_title">REGISTER</string>
     <string name="login_title">LOGIN</string>
     <string name="submit_btn">SUBMIT</string>
+    <string name="btn_deal">Deal</string>
+    <string name="btn_hit">Hit</string>
+    <string name="btn_stand">Stand</string>
 </resources>
