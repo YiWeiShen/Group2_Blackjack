@@ -19,19 +19,20 @@ import java.util.Random;
 public class GameActivity extends Activity {
 
     ImageView userCard1, userCard2, userCard3, userCard4, userCard5, aiCard1, aiCard2, aiCard3, aiCard4, aiCard5;
-    Button startButton, needButton, stopButton, coin10, coin20, coin50, coin100, clearButton, doubleButton, rankingButton;
-    TextView bet_txt, username_txt, balance_txt, score_txt, dealerPoint, userPoint;
+    Button dealButton, hitButton, standButton, coin10, coin20, coin50, coin100, clearButton, doubleButton, rankingButton;
+    TextView bet_txt, username_txt, balance_txt, score_txt, dealer_point_txt, user_point_txt;
 
+    Users user;
     ArrayList<Users> userList;
     private DBHelper DB;
-    private boolean endflag = false;
+    private boolean endFlag = false;
     private int player = 0;
     private int bet = 0;
     private int[] nums = new int[52];
     private ArrayList<Integer> userCards = new ArrayList<Integer>();
     private ArrayList<Integer> dealerCards = new ArrayList<Integer>();
-    private int currentPoint;
-    private int computerPoint = 0;
+    private int userPoint;
+    private int aiPoint = 0;
     private int currentPage = 0;
     int cardBack = R.drawable.cardback;
     int[] cardArray = {
@@ -93,7 +94,7 @@ public class GameActivity extends Activity {
         for (int i = 0; i < 52; i++) {
             nums[i] = i;
         }
-        for (int j = 0; j < 100; j++) {
+        for (int j = 0; j < 200; j++) {
             Random r = new Random();
             int i1 = r.nextInt(52);
             int i2 = r.nextInt(52);
@@ -113,10 +114,8 @@ public class GameActivity extends Activity {
         userCard2.setImageResource(cardArray[nums[2]]);
         dealerCards.add(nums[3]);
         aiCard2.setImageResource(cardBack);
-        currentPoint = calPoint(userCards);
-        String b = "User Point: ";
-        String a = b + String.valueOf(currentPoint);
-        userPoint.setText(a);
+        userPoint = calPoint(userCards);
+        user_point_txt.setText("User Point: " + String.valueOf(userPoint));
         currentPage = 4;
     }
 
@@ -132,20 +131,16 @@ public class GameActivity extends Activity {
         return temp;
     }
 
-    private ArrayList<Integer> needCard(ArrayList<Integer> cards) {
+    private ArrayList<Integer> hitCard(ArrayList<Integer> cards) {
 
         cards.add(nums[currentPage]);
         currentPage++;
         if (player == 0) {
-            currentPoint = calPoint(cards);
-            String b = "User Point: ";
-            String a = b + String.valueOf(currentPoint);
-            userPoint.setText(a);
+            userPoint = calPoint(cards);
+            user_point_txt.setText("User Point: " + String.valueOf(userPoint));
         } else {
-            computerPoint = calPoint(cards);
-            String b = "Dealer Point: ";
-            String a = b + String.valueOf(computerPoint);
-            dealerPoint.setText(a);
+            aiPoint = calPoint(cards);
+            dealer_point_txt.setText("Dealer Point: " + String.valueOf(aiPoint));
         }
         return cards;
     }
@@ -159,6 +154,7 @@ public class GameActivity extends Activity {
                         break;
                     case 1:
                         userCard2.setImageResource(cardArray[userCards.get(1)]);
+                        break;
                     case 2:
                         userCard3.setImageResource(cardArray[userCards.get(2)]);
                         break;
@@ -178,6 +174,7 @@ public class GameActivity extends Activity {
                         break;
                     case 1:
                         aiCard2.setImageResource(cardArray[dealerCards.get(1)]);
+                        break;
                     case 2:
                         aiCard3.setImageResource(cardArray[dealerCards.get(2)]);
                         break;
@@ -194,27 +191,27 @@ public class GameActivity extends Activity {
     }
 
     private boolean result() {
-        boolean flag = true;
+        boolean flag = false;
         userCards.clear();
         dealerCards.clear();
         currentPage = 0;
 
-        if (currentPoint == 21) {
+        if (userPoint == 21) {
             Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
             flag = true;
-        } else if (currentPoint < 21 && userCards.size() == 5) {
+        } else if (userPoint < 21 && userCards.size() == 5) {
             Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
             flag = true;
-        } else if (computerPoint > currentPoint) {
-            if (computerPoint > 21) {
+        } else if (aiPoint > userPoint) {
+            if (aiPoint > 21) {
                 Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
                 flag = true;
             } else {
                 Toast.makeText(GameActivity.this, "YOU LOST", Toast.LENGTH_SHORT).show();
                 flag = false;
             }
-        } else if (currentPoint > computerPoint) {
-            if (currentPoint > 21 || dealerCards.size() == 5) {
+        } else if (userPoint > aiPoint) {
+            if (userPoint > 21 || dealerCards.size() == 5) {
                 Toast.makeText(GameActivity.this, "YOU LOST", Toast.LENGTH_SHORT).show();
                 flag = false;
             } else {
@@ -222,29 +219,28 @@ public class GameActivity extends Activity {
                 flag = true;
             }
         }
-        startButton.setClickable(true);
-        startButton.setAlpha(1.00f);
-        coin10.setClickable(true);
-        coin10.setAlpha(1.00f);
-        coin20.setClickable(true);
-        coin20.setAlpha(1.00f);
-        coin50.setClickable(true);
-        coin50.setAlpha(1.00f);
-        coin100.setClickable(true);
-        coin100.setAlpha(1.00f);
-        clearButton.setClickable(true);
+
+        clearButton.setEnabled(true);
         clearButton.setAlpha(1.00f);
-        rankingButton.setClickable(true);
-        rankingButton.setAlpha(1.00f);
-        endflag = true;
+
+        hitButton.setEnabled(false);
+        hitButton.setAlpha(0.25f);
+
+        standButton.setEnabled(false);
+        standButton.setAlpha(0.25f);
+
+        doubleButton.setEnabled(false);
+        doubleButton.setAlpha(0.25f);
+
+        endFlag = true;
         return flag;
 
     }
 
     private void userTurn() {
-        userCards = needCard(userCards);
+        userCards = hitCard(userCards);
         show();
-        if (currentPoint >= 21 || userCards.size() == 5) {
+        if (userPoint >= 21 || userCards.size() == 5) {
             result();
         }
     }
@@ -252,12 +248,12 @@ public class GameActivity extends Activity {
     private void aiTurn() {
         player = 1;
         while (true) {
-            if (computerPoint > currentPoint || dealerCards.size() == 5) {
+            if (aiPoint > userPoint || dealerCards.size() == 5) {
                 break;
-            } else if (computerPoint > 21) {
+            } else if (aiPoint > 21) {
                 break;
             }
-            dealerCards = needCard(dealerCards);
+            dealerCards = hitCard(dealerCards);
             show();
         }
         result();
@@ -270,11 +266,11 @@ public class GameActivity extends Activity {
         setContentView(R.layout.activity_game);
 
         DB = new DBHelper(this);
-        Users user = DB.getUserByName(getIntent().getExtras().getString("username"));
+        user = DB.getUserByName(getIntent().getExtras().getString("username"));
 
-        startButton = findViewById(R.id.btn_deal);
-        needButton = findViewById(R.id.btn_hit);
-        stopButton = findViewById(R.id.btn_stand);
+        dealButton = findViewById(R.id.btn_deal);
+        hitButton = findViewById(R.id.btn_hit);
+        standButton = findViewById(R.id.btn_stand);
         coin10 = findViewById(R.id.coin_10);
         coin20 = findViewById(R.id.coin_20);
         coin50 = findViewById(R.id.coin_50);
@@ -283,20 +279,31 @@ public class GameActivity extends Activity {
         doubleButton = findViewById(R.id.btn_double);
         rankingButton = findViewById(R.id.btn_ranking);
 
-        startButton.setEnabled(false);
-        needButton.setEnabled(false);
-        stopButton.setEnabled(false);
-
         bet_txt = findViewById((R.id.bet));
         username_txt = findViewById(R.id.username_ingame);
         balance_txt = findViewById(R.id.balance_ingame);
         score_txt = findViewById(R.id.score);
-        dealerPoint = findViewById(R.id.dealer_point);
-        userPoint = findViewById(R.id.user_point);
+        dealer_point_txt = findViewById(R.id.dealer_point);
+        user_point_txt = findViewById(R.id.user_point);
 
         username_txt.setText("User: " + user.getUsername());
         balance_txt.setText("Balance: " + user.getBalance());
         score_txt.setText("Score: " + user.getScore());
+
+        dealer_point_txt.setAlpha(0.0f);
+        user_point_txt.setAlpha(0.0f);
+
+        dealButton.setEnabled(false);
+        dealButton.setAlpha(0.25f);
+
+        hitButton.setEnabled(false);
+        hitButton.setAlpha(0.25f);
+
+        standButton.setEnabled(false);
+        standButton.setAlpha(0.25f);
+
+        doubleButton.setEnabled(false);
+        doubleButton.setAlpha(0.25f);
 
         userCard1 = findViewById(R.id.player_card1);
         userCard2 = findViewById(R.id.player_card2);
@@ -313,42 +320,51 @@ public class GameActivity extends Activity {
         final MediaPlayer yea = MediaPlayer.create(this, R.raw.yea);
         final MediaPlayer ohh = MediaPlayer.create(this, R.raw.ohh);
 
-        startButton.setOnClickListener(new View.OnClickListener() {
+        dealButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 onCreate(null);
-                if (!startButton.isEnabled()) {
-                    startButton.setEnabled(true);
-                    needButton.setEnabled(true);
-                    stopButton.setEnabled(true);
-                }
+
                 bet_txt.setText("Bet: " + String.valueOf(bet));
+                dealer_point_txt.setAlpha(1.0f);
+                user_point_txt.setAlpha(1.0f);
                 shuffle();
                 deal();
-                startButton.setClickable(false);
-                startButton.setAlpha(0.25f);
-                coin10.setClickable(false);
+
+                dealButton.setEnabled(false);
+                dealButton.setAlpha(0.25f);
+                coin10.setEnabled(false);
                 coin10.setAlpha(0.25f);
-                coin20.setClickable(false);
+                coin20.setEnabled(false);
                 coin20.setAlpha(0.25f);
-                coin50.setClickable(false);
+                coin50.setEnabled(false);
                 coin50.setAlpha(0.25f);
-                coin100.setClickable(false);
+                coin100.setEnabled(false);
                 coin100.setAlpha(0.25f);
-                clearButton.setClickable(false);
+                clearButton.setEnabled(false);
                 clearButton.setAlpha(0.25f);
-                rankingButton.setClickable(false);
+                rankingButton.setEnabled(false);
                 rankingButton.setAlpha(0.25f);
+
+                hitButton.setAlpha(1.0f);
+                hitButton.setEnabled(true);
+
+                standButton.setAlpha(1.0f);
+                standButton.setEnabled(true);
+
+                doubleButton.setAlpha(1.0f);
+                doubleButton.setEnabled(true);
+
             }
         });
 
-        needButton.setOnClickListener(new View.OnClickListener() {
+        hitButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 userTurn();
-                if (endflag) {
+                if (endFlag) {
                     int balance, score;
                     String name = user.getUsername();
                     String password = user.getPassword();
@@ -357,31 +373,31 @@ public class GameActivity extends Activity {
                         // player wins
                         yea.setVolume(100, 100);
                         yea.start();
-                        balance = user.getBalance() + bet;
+                        balance = user.getBalance() + bet * 2;
                         score = user.getScore() + bet;
                     } else {
                         // player loses
                         ohh.setVolume(100, 100);
                         ohh.start();
-                        balance = user.getBalance() - bet;
+                        balance = user.getBalance();
                         score = user.getScore();
                     }
 
                     Boolean checkUpdate = DB.updateUserData(name, password, balance, score);
                     Log.d("Update/End/UserTurn: ", String.valueOf(checkUpdate));
-                    endflag = false;
+                    endFlag = false;
                     bet = 0;
                 }
             }
         });
 
-        stopButton.setOnClickListener(new View.OnClickListener() {
+        standButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
                 aiTurn();
-                if (endflag) {
+                if (endFlag) {
                     int balance, score;
                     String name = user.getUsername();
                     String password = user.getPassword();
@@ -390,22 +406,22 @@ public class GameActivity extends Activity {
                         // player wins
                         yea.setVolume(100, 100);
                         yea.start();
-                        balance = user.getBalance() + bet;
+                        balance = user.getBalance() + bet * 2;
                         score = user.getScore() + bet;
 
                     } else {
                         // player loses
                         ohh.setVolume(100, 100);
                         ohh.start();
-                        balance = user.getBalance() - bet;
+                        balance = user.getBalance();
                         score = user.getScore();
                     }
                     Boolean checkUpdate = DB.updateUserData(name, password, balance, score);
                     Log.d("Update/End/aiTurn: ", String.valueOf(checkUpdate));
-                    endflag = false;
+                    endFlag = false;
                     bet = 0;
-                    needButton.setEnabled(false);
-                    stopButton.setEnabled(false);
+                    hitButton.setEnabled(false);
+                    standButton.setEnabled(false);
                 }
             }
         });
@@ -414,19 +430,19 @@ public class GameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                if (!startButton.isEnabled()) {
-                    startButton.setEnabled(true);
+                if (!dealButton.isEnabled()) {
+                    dealButton.setEnabled(true);
+                    dealButton.setAlpha(1.0f);
                 }
                 if (user.getBalance() >= 10) {
-                    bet = 10;
-                    String b = "Bet: ";
-                    String a = String.valueOf(b) + String.valueOf(bet);
-                    bet_txt.setText(a);
+                    coin.start();
+                    bet += 10;
+                    user.setBalance(user.getBalance() - 10);
+                    bet_txt.setText("Bet: " + String.valueOf(bet));
+                    balance_txt.setText(("Balance: " + user.getBalance()));
                 } else {
                     Toast.makeText(GameActivity.this, "Not enough balance!", Toast.LENGTH_SHORT).show();
                 }
-
-                coin.start();
             }
         });
 
@@ -434,19 +450,19 @@ public class GameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                if (!startButton.isEnabled()) {
-                    startButton.setEnabled(true);
+                if (!dealButton.isEnabled()) {
+                    dealButton.setEnabled(true);
+                    dealButton.setAlpha(1.0f);
                 }
                 if (user.getBalance() >= 20) {
-                    bet = 20;
-                    String b = "Bet: ";
-                    String a = String.valueOf(b) + String.valueOf(bet);
-                    bet_txt.setText(a);
+                    coin.start();
+                    bet += 20;
+                    user.setBalance(user.getBalance() - 20);
+                    bet_txt.setText("Bet: " + String.valueOf(bet));
+                    balance_txt.setText(("Balance: " + user.getBalance()));
                 } else {
                     Toast.makeText(GameActivity.this, "Not enough balance!", Toast.LENGTH_SHORT).show();
                 }
-
-                coin.start();
             }
         });
 
@@ -454,19 +470,19 @@ public class GameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                if (!startButton.isEnabled()) {
-                    startButton.setEnabled(true);
+                if (!dealButton.isEnabled()) {
+                    dealButton.setEnabled(true);
+                    dealButton.setAlpha(1.0f);
                 }
                 if (user.getBalance() >= 50) {
-                    bet = 50;
-                    String b = "Bet: ";
-                    String a = String.valueOf(b) + String.valueOf(bet);
-                    bet_txt.setText(a);
+                    coin.start();
+                    bet += 50;
+                    user.setBalance(user.getBalance() - 50);
+                    bet_txt.setText("Bet: " + String.valueOf(bet));
+                    balance_txt.setText(("Balance: " + user.getBalance()));
                 } else {
                     Toast.makeText(GameActivity.this, "Not enough balance!", Toast.LENGTH_SHORT).show();
                 }
-
-                coin.start();
             }
         });
 
@@ -474,16 +490,19 @@ public class GameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                if (!startButton.isEnabled()) {
-                    startButton.setEnabled(true);
+                if (!dealButton.isEnabled()) {
+                    dealButton.setEnabled(true);
+                    dealButton.setAlpha(1.0f);
                 }
                 if (user.getBalance() >= 100) {
-                    bet = 100;
+                    coin.start();
+                    bet += 100;
+                    user.setBalance(user.getBalance() - 100);
                     bet_txt.setText("Bet: " + String.valueOf(bet));
+                    balance_txt.setText(("Balance: " + user.getBalance()));
                 } else {
                     Toast.makeText(GameActivity.this, "Not enough balance!", Toast.LENGTH_SHORT).show();
                 }
-                coin.start();
             }
         });
 
@@ -491,10 +510,32 @@ public class GameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                if ((bet * 2) < user.getBalance()) {
-                    bet = bet * 2;
-                    bet_txt.setText("Bet: " + String.valueOf(bet));
+                if (bet < user.getBalance()) {
                     coin.start();
+                    user.setBalance(user.getBalance() - bet);
+                    bet *= 2;
+                    bet_txt.setText("Bet: " + String.valueOf(bet));
+                    balance_txt.setText("Balance: " + user.getBalance());
+                    userTurn();
+                    if (endFlag) {
+                        if (result()) {
+                            // player wins
+                            yea.setVolume(100, 100);
+                            yea.start();
+                            user.setBalance(user.getBalance() + bet * 2);
+                            user.setScore(user.getScore() + bet);
+                            balance_txt.setText("Balance: " + user.getBalance());
+                            score_txt.setText("Score: " + user.getScore());
+                        } else {
+                            // player loses
+                            ohh.setVolume(100, 100);
+                            ohh.start();
+                        }
+                        Boolean checkUpdate = DB.updateUserData(user.getUsername(), user.getPassword(), user.getBalance(), user.getScore());
+                        Log.d("Update/End/UserTurn: ", String.valueOf(checkUpdate));
+                        endFlag = false;
+                        bet = 0;
+                    }
                 } else {
                     Toast.makeText(GameActivity.this, "Not enough balance!", Toast.LENGTH_SHORT).show();
                 }
@@ -505,8 +546,42 @@ public class GameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
+                user.setBalance(user.getBalance() + bet);
                 bet = 0;
                 bet_txt.setText("Bet: " + String.valueOf(bet));
+                balance_txt.setText(("Balance: " + user.getBalance()));
+
+                dealButton.setEnabled(false);
+                dealButton.setAlpha(0.25f);
+
+                dealer_point_txt.setAlpha(0.0f);
+                user_point_txt.setAlpha(0.0f);
+
+                score_txt.setText("Score: " + user.getScore());
+
+                aiCard1.setImageResource(android.R.color.transparent);
+                aiCard2.setImageResource(android.R.color.transparent);
+                aiCard3.setImageResource(android.R.color.transparent);
+                aiCard4.setImageResource(android.R.color.transparent);
+                aiCard5.setImageResource(android.R.color.transparent);
+
+                userCard1.setImageResource(android.R.color.transparent);
+                userCard2.setImageResource(android.R.color.transparent);
+                userCard3.setImageResource(android.R.color.transparent);
+                userCard4.setImageResource(android.R.color.transparent);
+                userCard5.setImageResource(android.R.color.transparent);
+
+                coin10.setEnabled(true);
+                coin10.setAlpha(1.00f);
+                coin20.setEnabled(true);
+                coin20.setAlpha(1.00f);
+                coin50.setEnabled(true);
+                coin50.setAlpha(1.00f);
+                coin100.setEnabled(true);
+                coin100.setAlpha(1.00f);
+
+                rankingButton.setEnabled(true);
+                rankingButton.setAlpha(1.00f);
             }
         });
 
@@ -519,16 +594,13 @@ public class GameActivity extends Activity {
 
                 } else {
                     userList = new ArrayList<>();
-                    Users user;
                     while (res.moveToNext()) {
-                        user = new Users(res.getString(0), "hide", res.getInt(1), res.getInt(2));
-                        userList.add(user);
-
+                        Users u = new Users(res.getString(0), "hide", res.getInt(1), res.getInt(2));
+                        userList.add(u);
                     }
                     Intent intent = new Intent(GameActivity.this, RankingActivity.class);
                     intent.putExtra("userlist", userList);
                     startActivity(intent);
-
                 }
             }
         });

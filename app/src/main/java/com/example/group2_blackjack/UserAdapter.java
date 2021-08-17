@@ -39,8 +39,8 @@ public class UserAdapter extends ArrayAdapter {
         TextView scoreText = v.findViewById(R.id.Score);
 
         nameText.setText(users.get(position).getUsername());
-        balanceText.setText(balanceText.getText() + String.valueOf(users.get(position).getBalance()));
-        scoreText.setText(scoreText.getText() + String.valueOf(users.get(position).getScore()));
+        balanceText.setText("Balance: " + String.valueOf(users.get(position).getBalance()));
+        scoreText.setText("Score: " + String.valueOf(users.get(position).getScore()));
 
         return v;
     }
