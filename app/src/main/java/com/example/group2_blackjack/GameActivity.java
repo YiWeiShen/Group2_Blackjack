@@ -259,7 +259,6 @@ public class GameActivity extends Activity {
         result();
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -324,14 +323,14 @@ public class GameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                onCreate(null);
 
-                bet_txt.setText("Bet: " + String.valueOf(bet));
+                // show points txt
                 dealer_point_txt.setAlpha(1.0f);
                 user_point_txt.setAlpha(1.0f);
                 shuffle();
                 deal();
 
+                // disable buttons
                 dealButton.setEnabled(false);
                 dealButton.setAlpha(0.25f);
                 coin10.setEnabled(false);
@@ -347,12 +346,11 @@ public class GameActivity extends Activity {
                 rankingButton.setEnabled(false);
                 rankingButton.setAlpha(0.25f);
 
+                // enable buttons
                 hitButton.setAlpha(1.0f);
                 hitButton.setEnabled(true);
-
                 standButton.setAlpha(1.0f);
                 standButton.setEnabled(true);
-
                 doubleButton.setAlpha(1.0f);
                 doubleButton.setEnabled(true);
 
@@ -365,25 +363,19 @@ public class GameActivity extends Activity {
             public void onClick(View v) {
                 userTurn();
                 if (endFlag) {
-                    int balance, score;
-                    String name = user.getUsername();
-                    String password = user.getPassword();
-
                     if (result()) {
                         // player wins
                         yea.setVolume(100, 100);
                         yea.start();
-                        balance = user.getBalance() + bet * 2;
-                        score = user.getScore() + bet;
+                        user.setBalance(user.getBalance() + bet * 2);
+                        user.setScore(user.getScore() + bet);
                     } else {
                         // player loses
                         ohh.setVolume(100, 100);
                         ohh.start();
-                        balance = user.getBalance();
-                        score = user.getScore();
                     }
 
-                    Boolean checkUpdate = DB.updateUserData(name, password, balance, score);
+                    Boolean checkUpdate = DB.updateUserData(user.getUsername(), user.getPassword(), user.getBalance(), user.getScore());
                     Log.d("Update/End/UserTurn: ", String.valueOf(checkUpdate));
                     endFlag = false;
                     bet = 0;
@@ -398,25 +390,18 @@ public class GameActivity extends Activity {
 
                 aiTurn();
                 if (endFlag) {
-                    int balance, score;
-                    String name = user.getUsername();
-                    String password = user.getPassword();
-
                     if (result()) {
                         // player wins
                         yea.setVolume(100, 100);
                         yea.start();
-                        balance = user.getBalance() + bet * 2;
-                        score = user.getScore() + bet;
-
+                        user.setBalance(user.getBalance() + bet * 2);
+                        user.setScore(user.getScore() + bet);
                     } else {
                         // player loses
                         ohh.setVolume(100, 100);
                         ohh.start();
-                        balance = user.getBalance();
-                        score = user.getScore();
                     }
-                    Boolean checkUpdate = DB.updateUserData(name, password, balance, score);
+                    Boolean checkUpdate = DB.updateUserData(user.getUsername(), user.getPassword(), user.getBalance(), user.getScore());
                     Log.d("Update/End/aiTurn: ", String.valueOf(checkUpdate));
                     endFlag = false;
                     bet = 0;
@@ -582,6 +567,8 @@ public class GameActivity extends Activity {
 
                 rankingButton.setEnabled(true);
                 rankingButton.setAlpha(1.00f);
+
+                player = 0;
             }
         });
 
