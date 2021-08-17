@@ -286,6 +286,7 @@ public class GameActivity extends Activity {
 
         final MediaPlayer coin = MediaPlayer.create(this, R.raw.coin);
         final MediaPlayer yea = MediaPlayer.create(this, R.raw.yea);
+        final MediaPlayer ohh = MediaPlayer.create(this, R.raw.ohh);
 
         startButton.setOnClickListener(new View.OnClickListener() {
 
@@ -320,6 +321,7 @@ public class GameActivity extends Activity {
 //                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
 //                        }
                     }else {
+                        ohh.start();
                         String name = user.getUsername();
                         String password = user.getPassword();
                         int balance = user.getBalance() - bet;
@@ -361,6 +363,7 @@ public class GameActivity extends Activity {
 //                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
 //                        }
                     }else {
+                        ohh.start();
                         String name = user.getUsername();
                         String password = user.getPassword();
                         int balance = user.getBalance() - bet;
