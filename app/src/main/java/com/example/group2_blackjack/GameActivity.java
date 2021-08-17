@@ -386,8 +386,6 @@ public class GameActivity extends Activity {
                 String a = String.valueOf(b) + String.valueOf(bet);
                 bet_txt.setText(a);
 
-                int maxVol = 100;
-                coin.setVolume(100, 100);
                 coin.start();
             }
         });
