@@ -279,9 +279,9 @@ public class GameActivity extends Activity {
 
         DB = new DBHelper(this);
         Users user = DB.getUserByName(getIntent().getExtras().getString("username"));
-        startButton = findViewById(R.id.button);
-        needButton = findViewById(R.id.button1);
-        stopButton = findViewById(R.id.button2);
+        startButton = findViewById(R.id.btn_deal);
+        needButton = findViewById(R.id.btn_hit);
+        stopButton = findViewById(R.id.btn_stand);
         coin10 = findViewById(R.id.coin_10);
         coin20 = findViewById(R.id.coin_20);
         coin50 = findViewById(R.id.coin_50);
