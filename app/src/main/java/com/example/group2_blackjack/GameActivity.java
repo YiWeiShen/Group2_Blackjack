@@ -251,7 +251,7 @@ public class GameActivity extends Activity {
     private void aiTurn() {
         player = 1;
         while (true) {
-            if (computerPoint > currentPoint || userCards.size() == 5) {
+            if (computerPoint >= currentPoint || userCards.size() == 5) {
                 break;
             } else if (computerPoint > 21) {
                 break;
