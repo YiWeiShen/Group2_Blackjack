@@ -33,16 +33,14 @@ public class UserAdapter extends ArrayAdapter {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        View v = convertView;
-        v = layoutInflater.inflate(layoutResource, parent,false);
+        View v = layoutInflater.inflate(layoutResource, parent, false);
         TextView nameText = v.findViewById(R.id.username);
         TextView balanceText = v.findViewById(R.id.balance);
-        TextView  scoreText = v.findViewById(R.id.Score);
+        TextView scoreText = v.findViewById(R.id.Score);
 
-        nameText.setText(nameText.getText()+users.get(position).getUsername());
-        balanceText.setText(balanceText.getText()+String.valueOf(users.get(position).getBalance()));
-        scoreText.setText(scoreText.getText()+String.valueOf(users.get(position).getScore()));
-
+        nameText.setText(users.get(position).getUsername());
+        balanceText.setText(balanceText.getText() + String.valueOf(users.get(position).getBalance()));
+        scoreText.setText(scoreText.getText() + String.valueOf(users.get(position).getScore()));
 
         return v;
     }

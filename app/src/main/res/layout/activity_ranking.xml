@@ -12,27 +12,30 @@
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:fontFamily="sans-serif-black"
             android:text="@string/username_label"
             android:textColor="#00796B"
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/balance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/Balance"
-            android:textColor="#000000"
-            android:textSize="16sp" />
-
-        <TextView
             android:id="@+id/Score"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:fontFamily="sans-serif-medium"
             android:text="@string/Score"
             android:textColor="#050505"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/balance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/Balance"
+            android:textColor="#000000"
             android:textSize="16sp" />
 
     </LinearLayout>

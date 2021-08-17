@@ -59,7 +59,7 @@ public class Users implements Serializable {
         return "Users " +
                 ", name='" + username + '\n' +
                 ", balance='" + balance + '\n' +
-                ", score=" + score + '\n'+
+                ", score=" + score + '\n' +
                 '}';
     }
 

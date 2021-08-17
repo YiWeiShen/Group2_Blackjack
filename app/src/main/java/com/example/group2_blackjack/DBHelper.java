@@ -58,7 +58,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public Boolean updateUserData(String username,String password, Integer balance, Integer score) {
+    public Boolean updateUserData(String username, String password, Integer balance, Integer score) {
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValue = new ContentValues(); // keep things in pair
         contentValue.put("password", password);
@@ -106,16 +106,15 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             Users user = new Users(username, cursor.getString(1), cursor.getInt(2), cursor.getInt(3));
-            return  user;
+            return user;
         }
         return null;
     }
 
-    public Cursor getdata(){
+    public Cursor getdata() {
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select username, balance, score from Userdetails order by score DESC", null) ;
+        Cursor cursor = DB.rawQuery("Select username, balance, score from Userdetails order by score DESC", null);
 
         return cursor;
-
     }
 }

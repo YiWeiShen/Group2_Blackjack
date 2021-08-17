@@ -12,6 +12,7 @@ public class RankingActivity extends AppCompatActivity {
 
     ArrayList<Users> userList;
     ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +22,7 @@ public class RankingActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         userList = (ArrayList<Users>) intent.getSerializableExtra("userlist");
-        UserAdapter userAdapter = new UserAdapter(this,R.layout.activity_ranking,userList);
+        UserAdapter userAdapter = new UserAdapter(this, R.layout.activity_ranking, userList);
         listView.setAdapter(userAdapter);
     }
 }
