@@ -36,4 +36,5 @@
     <string name="Score">Score: </string>
     <string name="dealPoint">Dealer Point: </string>
     <string name="userPoint">User Point: </string>
+    <string name="dealer">Dealer</string>
 </resources>
