@@ -211,9 +211,6 @@ public class GameActivity extends Activity {
                 Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
                 flag = true;
             }
-        } else if (currentPoint == computerPoint){
-            Toast.makeText(GameActivity.this, "YOU LOST", Toast.LENGTH_SHORT).show();
-            flag = false;
         }
         startButton.setClickable(true);
         startButton.setAlpha(1.00f);
@@ -308,25 +305,27 @@ public class GameActivity extends Activity {
                         int balance = user.getBalance() + bet;
                         int score = user.getScore() + bet;
                         Boolean checkupdate = DB.updateUserData( name, password, balance, score);
-                        if(checkupdate){
-                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
-                        }
+//                        if(checkupdate){
+//                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
+//                        }
+//                        else {
+//                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
+//                        }
                     }else {
                         String name = user.getUsername();
                         String password = user.getPassword();
                         int balance = user.getBalance() - bet;
                         int score = user.getScore();
                         Boolean checkupdate = DB.updateUserData( name, password, balance, score);
-                        if(checkupdate){
-                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
-                        }
+//                        if(checkupdate){
+//                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
+//                        }
+//                        else {
+//                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
+//                        }
                     }
+                    endflag = false;
+                    bet = 0;
                 }
             }
         });
@@ -344,25 +343,27 @@ public class GameActivity extends Activity {
                         int balance = user.getBalance() + bet;
                         int score = user.getScore() + bet;
                         Boolean checkupdate = DB.updateUserData( name, password, balance, score);
-                        if(checkupdate){
-                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
-                        }
+//                        if(checkupdate){
+//                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
+//                        }
+//                        else {
+//                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
+//                        }
                     }else {
                         String name = user.getUsername();
                         String password = user.getPassword();
                         int balance = user.getBalance() - bet;
                         int score = user.getScore();
                         Boolean checkupdate = DB.updateUserData( name, password, balance, score);
-                        if(checkupdate){
-                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
-                        }
+//                        if(checkupdate){
+//                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
+//                        }
+//                        else {
+//                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
+//                        }
                     }
+                    endflag = false;
+                    bet = 0;
                 }
             }
         });
