@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="10sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             tools:ignore="NestedWeights" />
     </LinearLayout>
@@ -38,15 +38,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/contentDescription_ai_card4"
             android:padding="3dp"
-            tools:srcCompat="@tools:sample/avatars"
-            tools:ignore="NestedWeights" />
+            tools:ignore="NestedWeights"
+            tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
             android:id="@+id/dealer_card2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/contentDescription_ai_card2"
             android:padding="3dp"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -55,7 +57,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/contentDescription_ai_card1"
             android:padding="3dp"
+            tools:ignore="ImageContrastCheck"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
@@ -63,6 +67,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/contentDescription_ai_card3"
             android:padding="3dp"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -71,6 +76,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/contentDescription_ai_card5"
             android:padding="3dp"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -88,15 +94,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/contentDescription_user_card4"
             android:padding="3dp"
-            tools:srcCompat="@tools:sample/avatars"
-            tools:ignore="NestedWeights" />
+            tools:ignore="NestedWeights,ImageContrastCheck"
+            tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
             android:id="@+id/player_card2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/contentDescription_ai_card2"
             android:padding="3dp"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -105,6 +113,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/contentDescription_user_card1"
+            tools:ignore="ImageContrastCheck"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
@@ -112,7 +122,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/contentDescription_ai_card3"
             android:padding="3dp"
+            tools:ignore="ImageContrastCheck"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
@@ -120,7 +132,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/contentDescription_user_card5"
             android:padding="3dp"
+            tools:ignore="ImageContrastCheck"
             tools:srcCompat="@tools:sample/avatars" />
     </LinearLayout>
 
@@ -142,6 +156,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/dealPoint"
+                android:textColor="#F0F4C3"
                 android:textStyle="bold" />
 
             <TextView
@@ -151,6 +166,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/userPoint"
+                android:textColor="#F0F4C3"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -164,7 +180,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/bet" />
+                android:text="@string/bet"
+                android:textColor="#F0F4C3" />
 
             <TextView
                 android:id="@+id/username_ingame"
@@ -172,6 +189,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/player"
+                android:textColor="#F0F4C3"
                 android:textSize="14sp" />
 
             <TextView
@@ -180,6 +198,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/Balance"
+                android:textColor="#F0F4C3"
                 android:textSize="14sp" />
 
             <TextView
@@ -188,6 +207,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/Score"
+                android:textColor="#F0F4C3"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -202,45 +222,60 @@
 
             <Button
                 android:id="@+id/coin_10"
-                android:layout_width="wrap_content"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:background="#FF9800"
                 android:soundEffectsEnabled="false"
                 android:text="@string/coin_10"
-                app:backgroundTint="#FF9800" />
+                android:textColor="#424242"
+                app:backgroundTint="#FF9800"
+                tools:ignore="TouchTargetSizeCheck"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/coin_20"
-                android:layout_width="wrap_content"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:background="#FF9800"
                 android:soundEffectsEnabled="false"
                 android:text="@string/coin_20"
-                app:backgroundTint="#FF9800" />
+                android:textColor="#424242"
+                app:backgroundTint="#FF9800"
+                tools:ignore="TouchTargetSizeCheck"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/coin_50"
-                android:layout_width="wrap_content"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:background="#FF9800"
                 android:soundEffectsEnabled="false"
                 android:text="@string/coin_50"
-                app:backgroundTint="#FF9800" />
+                android:textColor="#424242"
+                app:backgroundTint="#FF9800"
+                tools:ignore="TouchTargetSizeCheck"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/coin_100"
-                android:layout_width="wrap_content"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
+                android:background="#FF9800"
                 android:soundEffectsEnabled="false"
                 android:text="@string/coin_100"
+                android:textColor="#424242"
                 app:backgroundTint="#FF9800"
-                tools:ignore="NestedWeights" />
+                tools:ignore="NestedWeights,TouchTargetSizeCheck"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/btn_clear"
@@ -249,8 +284,12 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
+                android:background="#FF5722"
                 android:text="@string/btn_clear"
-                app:backgroundTint="#FF5722" />
+                android:textColor="#212121"
+                app:backgroundTint="#FF5722"
+                tools:ignore="TouchTargetSizeCheck"
+                style="?android:attr/buttonBarButtonStyle" />
 
         </LinearLayout>
 
@@ -266,56 +305,83 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
+                android:background="#03A9F4"
                 android:clickable="false"
                 android:text="@string/btn_deal"
-                app:backgroundTint="#03A9F4" />
+                android:textColor="@color/black"
+                app:backgroundTint="#03A9F4"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/btn_hit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
+                android:background="#03A9F4"
+                android:minHeight="48dp"
                 android:text="@string/btn_hit"
-                app:backgroundTint="#03A9F4" />
+                android:textColor="@color/black"
+                app:backgroundTint="#03A9F4"
+                tools:ignore="TouchTargetSizeCheck"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/btn_stand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
+                android:background="#03A9F4"
+                android:minHeight="48dp"
                 android:text="@string/btn_stand"
-                app:backgroundTint="#03A9F4" />
+                android:textColor="@color/black"
+                app:backgroundTint="#03A9F4"
+                tools:ignore="TouchTargetSizeCheck"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/btn_double"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
+                android:background="#03A9F4"
+                android:minHeight="48dp"
                 android:text="@string/btn_double"
-                app:backgroundTint="#03A9F4" />
+                android:textColor="@color/black"
+                app:backgroundTint="#03A9F4"
+                tools:ignore="TouchTargetSizeCheck"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/btn_ranking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
+                android:background="#03A9F4"
                 android:text="@string/btn_ranking"
-                app:backgroundTint="#03A9F4" />
+                android:textColor="#4A148C"
+                app:backgroundTint="#03A9F4"
+                tools:ignore="TouchTargetSizeCheck"
+                style="?android:attr/buttonBarButtonStyle" />
         </LinearLayout>
     </LinearLayout>
 

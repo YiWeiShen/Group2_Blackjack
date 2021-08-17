@@ -37,4 +37,14 @@
     <string name="dealPoint">Dealer Point: </string>
     <string name="userPoint">User Point: </string>
     <string name="dealer">Dealer</string>
+    <string name="contentDescription_ai_card1">ai_card1</string>
+    <string name="contentDescription_ai_card2">ai_card2</string>
+    <string name="contentDescription_ai_card3">ai_card3</string>
+    <string name="contentDescription_ai_card4">ai_card4</string>
+    <string name="contentDescription_ai_card5">ai_card5</string>
+    <string name="contentDescription_user_card1">user_card1</string>
+    <string name="contentDescription_user_card2">user_card2</string>
+    <string name="contentDescription_user_card3">user_card3</string>
+    <string name="contentDescription_user_card4">user_card4</string>
+    <string name="contentDescription_user_card5">user_card5</string>
 </resources>

@@ -27,7 +27,7 @@ public class GameActivity extends Activity {
     private boolean endflag = false;
     private int player = 0;
     private int bet = 0;
-    private int[] num = new int[52];
+    private int[] nums = new int[52];
     private ArrayList<Integer> userCards = new ArrayList<Integer>();
     private ArrayList<Integer> dealerCards = new ArrayList<Integer>();
     private int currentPoint;
@@ -91,27 +91,27 @@ public class GameActivity extends Activity {
 
     private void shuffle() {
         for (int i = 0; i < 52; i++) {
-            num[i] = i;
+            nums[i] = i;
         }
         for (int j = 0; j < 100; j++) {
             Random r = new Random();
             int i1 = r.nextInt(52);
             int i2 = r.nextInt(52);
 
-            int temp = num[i2];
-            num[i2] = num[i1];
-            num[i1] = temp;
+            int temp = nums[i2];
+            nums[i2] = nums[i1];
+            nums[i1] = temp;
         }
     }
 
     private void deal() {
-        userCards.add(num[0]);
-        userCard1.setImageResource(cardArray[num[0]]);
-        dealerCards.add(num[1]);
-        aiCard1.setImageResource(cardArray[num[1]]);
-        userCards.add(num[2]);
-        userCard2.setImageResource(cardArray[num[2]]);
-        dealerCards.add(num[3]);
+        userCards.add(nums[0]);
+        userCard1.setImageResource(cardArray[nums[0]]);
+        dealerCards.add(nums[1]);
+        aiCard1.setImageResource(cardArray[nums[1]]);
+        userCards.add(nums[2]);
+        userCard2.setImageResource(cardArray[nums[2]]);
+        dealerCards.add(nums[3]);
         aiCard2.setImageResource(cardBack);
         currentPoint = calPoint(userCards);
         String b = "User Point: ";
@@ -134,7 +134,7 @@ public class GameActivity extends Activity {
 
     private ArrayList<Integer> needCard(ArrayList<Integer> cards) {
 
-        cards.add(num[currentPage]);
+        cards.add(nums[currentPage]);
         currentPage++;
         if (player == 0) {
             currentPoint = calPoint(cards);
@@ -271,6 +271,7 @@ public class GameActivity extends Activity {
 
         DB = new DBHelper(this);
         Users user = DB.getUserByName(getIntent().getExtras().getString("username"));
+
         startButton = findViewById(R.id.btn_deal);
         needButton = findViewById(R.id.btn_hit);
         stopButton = findViewById(R.id.btn_stand);
@@ -322,9 +323,7 @@ public class GameActivity extends Activity {
                     needButton.setEnabled(true);
                     stopButton.setEnabled(true);
                 }
-                String b = "Bet: ";
-                String a = b + String.valueOf(bet);
-                bet_txt.setText(a);
+                bet_txt.setText("Bet: " + String.valueOf(bet));
                 shuffle();
                 deal();
                 startButton.setClickable(false);
@@ -355,13 +354,13 @@ public class GameActivity extends Activity {
                     String password = user.getPassword();
 
                     if (result()) {
-                        // player win
+                        // player wins
                         yea.setVolume(100, 100);
                         yea.start();
                         balance = user.getBalance() + bet;
                         score = user.getScore() + bet;
                     } else {
-                        // player lose
+                        // player loses
                         ohh.setVolume(100, 100);
                         ohh.start();
                         balance = user.getBalance() - bet;
@@ -369,7 +368,7 @@ public class GameActivity extends Activity {
                     }
 
                     Boolean checkUpdate = DB.updateUserData(name, password, balance, score);
-                    Log.d("Update score(Endgame): ", String.valueOf(checkUpdate));
+                    Log.d("Update/End/UserTurn: ", String.valueOf(checkUpdate));
                     endflag = false;
                     bet = 0;
                 }
@@ -383,40 +382,28 @@ public class GameActivity extends Activity {
 
                 aiTurn();
                 if (endflag) {
+                    int balance, score;
+                    String name = user.getUsername();
+                    String password = user.getPassword();
+
                     if (result()) {
+                        // player wins
                         yea.setVolume(100, 100);
                         yea.start();
-                        String name = user.getUsername();
-                        String password = user.getPassword();
-                        int balance = user.getBalance() + bet;
-                        int score = user.getScore() + bet;
-                        Boolean checkupdate = DB.updateUserData(name, password, balance, score);
+                        balance = user.getBalance() + bet;
+                        score = user.getScore() + bet;
 
-
-//                        if(checkupdate){
-//                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
-//                        }
-//                        else {
-//                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
-//                        }
                     } else {
+                        // player loses
                         ohh.setVolume(100, 100);
                         ohh.start();
-                        String name = user.getUsername();
-                        String password = user.getPassword();
-                        int balance = user.getBalance() - bet;
-                        int score = user.getScore();
-                        Boolean checkupdate = DB.updateUserData(name, password, balance, score);
-//                        if(checkupdate){
-//                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
-//                        }
-//                        else {
-//                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
-//                        }
+                        balance = user.getBalance() - bet;
+                        score = user.getScore();
                     }
+                    Boolean checkUpdate = DB.updateUserData(name, password, balance, score);
+                    Log.d("Update/End/aiTurn: ", String.valueOf(checkUpdate));
                     endflag = false;
                     bet = 0;
-
                     needButton.setEnabled(false);
                     stopButton.setEnabled(false);
                 }
@@ -492,13 +479,10 @@ public class GameActivity extends Activity {
                 }
                 if (user.getBalance() >= 100) {
                     bet = 100;
-                    String b = "Bet: ";
-                    String a = String.valueOf(b) + String.valueOf(bet);
-                    bet_txt.setText(a);
+                    bet_txt.setText("Bet: " + String.valueOf(bet));
                 } else {
                     Toast.makeText(GameActivity.this, "Not enough balance!", Toast.LENGTH_SHORT).show();
                 }
-
                 coin.start();
             }
         });
@@ -509,10 +493,7 @@ public class GameActivity extends Activity {
             public void onClick(View v) {
                 if ((bet * 2) < user.getBalance()) {
                     bet = bet * 2;
-                    String b = "Bet: ";
-                    String a = String.valueOf(b) + String.valueOf(bet);
-                    bet_txt.setText(a);
-
+                    bet_txt.setText("Bet: " + String.valueOf(bet));
                     coin.start();
                 } else {
                     Toast.makeText(GameActivity.this, "Not enough balance!", Toast.LENGTH_SHORT).show();
@@ -525,9 +506,7 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 bet = 0;
-                String b = "Bet: ";
-                String a = String.valueOf(b) + String.valueOf(bet);
-                bet_txt.setText(a);
+                bet_txt.setText("Bet: " + String.valueOf(bet));
             }
         });
 
