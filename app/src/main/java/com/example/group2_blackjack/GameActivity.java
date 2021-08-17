@@ -28,7 +28,7 @@ public class GameActivity extends Activity {
     private int bet = 0;
     private int[] num = new int[52];
     private ArrayList<Integer> userCards = new ArrayList<Integer>();
-    private ArrayList<Integer> ai = new ArrayList<Integer>();
+    private ArrayList<Integer> dealerCards = new ArrayList<Integer>();
     private int currentPoint;
     private int computerPoint = 0;
     private int currentPage = 0;
@@ -106,11 +106,11 @@ public class GameActivity extends Activity {
     private void deal() {
         userCards.add(num[0]);
         userCard1.setImageResource(cardArray[num[0]]);
-        ai.add(num[1]);
+        dealerCards.add(num[1]);
         aiCard1.setImageResource(cardArray[num[1]]);
         userCards.add(num[2]);
         userCard2.setImageResource(cardArray[num[2]]);
-        ai.add(num[3]);
+        dealerCards.add(num[3]);
         aiCard2.setImageResource(cardBack);
         currentPoint = calPoint(userCards);
         String b = "User Point: ";
@@ -170,21 +170,21 @@ public class GameActivity extends Activity {
                 }
             }
         } else {
-            for (int i = 0; i < ai.size(); i++) {
+            for (int i = 0; i < dealerCards.size(); i++) {
                 switch (i) {
                     case 0:
-                        aiCard1.setImageResource(cardArray[ai.get(0)]);
+                        aiCard1.setImageResource(cardArray[dealerCards.get(0)]);
                         break;
                     case 1:
-                        aiCard2.setImageResource(cardArray[ai.get(1)]);
+                        aiCard2.setImageResource(cardArray[dealerCards.get(1)]);
                     case 2:
-                        aiCard3.setImageResource(cardArray[ai.get(2)]);
+                        aiCard3.setImageResource(cardArray[dealerCards.get(2)]);
                         break;
                     case 3:
-                        aiCard4.setImageResource(cardArray[ai.get(3)]);
+                        aiCard4.setImageResource(cardArray[dealerCards.get(3)]);
                         break;
                     case 4:
-                        aiCard5.setImageResource(cardArray[ai.get(4)]);
+                        aiCard5.setImageResource(cardArray[dealerCards.get(4)]);
                         break;
                 }
             }
@@ -195,7 +195,7 @@ public class GameActivity extends Activity {
     private boolean result() {
         boolean flag = true;
         userCards.clear();
-        ai.clear();
+        dealerCards.clear();
         currentPage = 0;
 
         if (currentPoint == 21) {
@@ -213,7 +213,7 @@ public class GameActivity extends Activity {
                 flag = false;
             }
         } else if (currentPoint > computerPoint) {
-            if (currentPoint > 21 || ai.size() == 5) {
+            if (currentPoint > 21 || dealerCards.size() == 5) {
                 Toast.makeText(GameActivity.this, "YOU LOST", Toast.LENGTH_SHORT).show();
                 flag = false;
             } else {
@@ -251,12 +251,12 @@ public class GameActivity extends Activity {
     private void aiTurn() {
         player = 1;
         while (true) {
-            if (computerPoint > currentPoint || ai.size() == 5) {
+            if (computerPoint > currentPoint || dealerCards.size() == 5) {
                 break;
             } else if (computerPoint > 21) {
                 break;
             }
-            ai = needCard(ai);
+            dealerCards = needCard(dealerCards);
             show();
         }
         result();
