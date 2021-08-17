@@ -245,9 +245,6 @@ public class GameActivity extends Activity {
         show();
         if (currentPoint >= 21 || userCards.size() == 5) {
             result();
-//            if (result()) {
-//                yea.start();
-//            }
         }
     }
 
@@ -336,7 +333,6 @@ public class GameActivity extends Activity {
                 rankingButton.setClickable(false);
                 rankingButton.setAlpha(0.25f);
 
-//                bgm.start();
             }
         });
 
@@ -435,7 +431,6 @@ public class GameActivity extends Activity {
                 String a = String.valueOf(b) + String.valueOf(bet);
                 bet_txt.setText(a);
 
-                coin.setVolume(100,100);
                 coin.start();
             }
         });
@@ -449,7 +444,6 @@ public class GameActivity extends Activity {
                 String a = String.valueOf(b) + String.valueOf(bet);
                 bet_txt.setText(a);
 
-                coin.setVolume(100,100);
                 coin.start();
             }
         });
@@ -463,7 +457,6 @@ public class GameActivity extends Activity {
                 String a = String.valueOf(b) + String.valueOf(bet);
                 bet_txt.setText(a);
 
-                coin.setVolume(100,100);
                 coin.start();
             }
         });
@@ -477,7 +470,6 @@ public class GameActivity extends Activity {
                 String a = String.valueOf(b) + String.valueOf(bet);
                 bet_txt.setText(a);
 
-                coin.setVolume(100,100);
                 coin.start();
             }
         });
@@ -491,7 +483,6 @@ public class GameActivity extends Activity {
                 String a = String.valueOf(b) + String.valueOf(bet);
                 bet_txt.setText(a);
 
-                coin.setVolume(100,100);
                 coin.start();
             }
         });
