@@ -3,7 +3,10 @@ package com.example.group2_blackjack;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
         login_nameInput = findViewById(R.id.login_nameInput);
 
         DB = new DBHelper(this);
+
+        MediaPlayer bgm = MediaPlayer.create(this, R.raw.casinobgm);
+        bgm.setLooping(true);
+        bgm.start();
 
         reg_btn.setOnClickListener(new View.OnClickListener() {
             @Override

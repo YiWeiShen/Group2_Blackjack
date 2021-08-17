@@ -1,7 +1,5 @@
 package com.example.group2_blackjack;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 
 import android.app.Activity;
 import android.content.Intent;
@@ -275,9 +273,9 @@ public class GameActivity extends Activity {
 
         DB = new DBHelper(this);
         Users user = DB.getUserByName(getIntent().getExtras().getString("username"));
-        startButton = findViewById(R.id.button);
-        needButton = findViewById(R.id.button1);
-        stopButton = findViewById(R.id.button2);
+        startButton = findViewById(R.id.btn_deal);
+        needButton = findViewById(R.id.btn_hit);
+        stopButton = findViewById(R.id.btn_stand);
         coin10 = findViewById(R.id.coin_10);
         coin20 = findViewById(R.id.coin_20);
         coin50 = findViewById(R.id.coin_50);
@@ -311,6 +309,7 @@ public class GameActivity extends Activity {
         final MediaPlayer coin = MediaPlayer.create(this, R.raw.coin);
         final MediaPlayer yea = MediaPlayer.create(this, R.raw.yea);
         final MediaPlayer ohh = MediaPlayer.create(this, R.raw.ohh);
+        final MediaPlayer bgm = MediaPlayer.create(this, R.raw.casinobgm);
 
         startButton.setOnClickListener(new View.OnClickListener() {
 
@@ -336,6 +335,8 @@ public class GameActivity extends Activity {
                 clearButton.setAlpha(0.25f);
                 rankingButton.setClickable(false);
                 rankingButton.setAlpha(0.25f);
+
+//                bgm.start();
             }
         });
 
@@ -347,6 +348,7 @@ public class GameActivity extends Activity {
                 userTurn();
                 if(endflag){
                     if(result()){
+                        yea.setVolume(100,100);
                         yea.start();
                         String name = user.getUsername();
                         String password = user.getPassword();
@@ -360,6 +362,7 @@ public class GameActivity extends Activity {
 //                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
 //                        }
                     }else {
+                        ohh.setVolume(100,100);
                         ohh.start();
                         String name = user.getUsername();
                         String password = user.getPassword();
@@ -387,6 +390,7 @@ public class GameActivity extends Activity {
                 aiTurn();
                 if(endflag){
                     if(result()){
+                        yea.setVolume(100,100);
                         yea.start();
                         String name = user.getUsername();
                         String password = user.getPassword();
@@ -402,6 +406,7 @@ public class GameActivity extends Activity {
 //                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
 //                        }
                     }else {
+                        ohh.setVolume(100,100);
                         ohh.start();
                         String name = user.getUsername();
                         String password = user.getPassword();
