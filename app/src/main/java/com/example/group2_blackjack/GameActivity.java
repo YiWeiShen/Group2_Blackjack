@@ -21,7 +21,7 @@ public class GameActivity extends Activity {
 
     ImageView userCard1, userCard2, userCard3, userCard4, userCard5, aiCard1, aiCard2, aiCard3, aiCard4, aiCard5;
     Button startButton, needButton, stopButton, coin10, coin20, coin50, coin100, clearButton, doubleButton, rankingButton;
-    TextView bet_txt, username_txt, balance_txt, score_txt;
+    TextView bet_txt, username_txt, balance_txt, score_txt, dealerPoint, userPoint;
 
     ArrayList<Users> userList;
     private DBHelper DB;
@@ -114,6 +114,10 @@ public class GameActivity extends Activity {
         userCard2.setImageResource(cardArray[num[2]]);
         ai.add(num[3]);
         aiCard2.setImageResource(cardBack);
+        currentPoint = calPoint(userCards);
+        String b = "User Point: ";
+        String a = String.valueOf(b) + String.valueOf(currentPoint);
+        userPoint.setText(a);
         currentPage = 4;
     }
 
@@ -135,8 +139,14 @@ public class GameActivity extends Activity {
         currentPage++;
         if (player == 0) {
             currentPoint = calPoint(cards);
+            String b = "User Point: ";
+            String a = String.valueOf(b) + String.valueOf(currentPoint);
+            userPoint.setText(a);
         } else {
             computerPoint = calPoint(cards);
+            String b = "Dealer Point: ";
+            String a = String.valueOf(b) + String.valueOf(computerPoint);
+            dealerPoint.setText(a);
         }
         return cards;
     }
@@ -215,6 +225,18 @@ public class GameActivity extends Activity {
         }
         startButton.setClickable(true);
         startButton.setAlpha(1.00f);
+        coin10.setClickable(true);
+        coin10.setAlpha(1.00f);
+        coin20.setClickable(true);
+        coin20.setAlpha(1.00f);
+        coin50.setClickable(true);
+        coin50.setAlpha(1.00f);
+        coin100.setClickable(true);
+        coin100.setAlpha(1.00f);
+        clearButton.setClickable(true);
+        clearButton.setAlpha(1.00f);
+        rankingButton.setClickable(true);
+        rankingButton.setAlpha(1.00f);
         endflag = true;
         return flag;
 
@@ -268,6 +290,8 @@ public class GameActivity extends Activity {
         username_txt = findViewById(R.id.username_ingame);
         balance_txt = findViewById(R.id.balance_ingame);
         score_txt = findViewById(R.id.score);
+        dealerPoint = findViewById(R.id.dealer_point);
+        userPoint = findViewById(R.id.user_point);
 
         username_txt.setText("User: "+ user.getUsername());
         balance_txt.setText("Balance: "+user.getBalance());
@@ -293,10 +317,25 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 onCreate(null);
+                String b = "Bet: ";
+                String a = String.valueOf(b) + String.valueOf(bet);
+                bet_txt.setText(a);
                 shuffle();
                 deal();
                 startButton.setClickable(false);
                 startButton.setAlpha(0.25f);
+                coin10.setClickable(false);
+                coin10.setAlpha(0.25f);
+                coin20.setClickable(false);
+                coin20.setAlpha(0.25f);
+                coin50.setClickable(false);
+                coin50.setAlpha(0.25f);
+                coin100.setClickable(false);
+                coin100.setAlpha(0.25f);
+                clearButton.setClickable(false);
+                clearButton.setAlpha(0.25f);
+                rankingButton.setClickable(false);
+                rankingButton.setAlpha(0.25f);
             }
         });
 
@@ -429,6 +468,20 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 bet = 100;
+                String b = "Bet: ";
+                String a = String.valueOf(b) + String.valueOf(bet);
+                bet_txt.setText(a);
+
+                coin.setVolume(100,100);
+                coin.start();
+            }
+        });
+
+        doubleButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                bet = bet * 2;
                 String b = "Bet: ";
                 String a = String.valueOf(b) + String.valueOf(bet);
                 bet_txt.setText(a);

@@ -34,4 +34,6 @@
     <string name="player">Player: </string>
     <string name="Balance">Balance: </string>
     <string name="Score">Score: </string>
+    <string name="dealPoint">Dealer Point: </string>
+    <string name="userPoint">User Point: </string>
 </resources>
