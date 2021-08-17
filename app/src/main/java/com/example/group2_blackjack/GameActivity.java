@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -88,6 +89,9 @@ public class GameActivity extends Activity {
             R.drawable.clubqueen,
             R.drawable.clubking
     };
+
+    final MediaPlayer coin = MediaPlayer.create(this, R.raw.coin);
+    final MediaPlayer yea = MediaPlayer.create(this, R.raw.yea);
 
     private void shuffle() {
         for (int i = 0; i < 52; i++) {
@@ -224,6 +228,9 @@ public class GameActivity extends Activity {
         show();
         if (currentPoint >= 21 || userCards.size() == 5) {
             result();
+            if (result()) {
+                yea.start();
+            }
         }
     }
 
@@ -279,6 +286,8 @@ public class GameActivity extends Activity {
         aiCard3 = findViewById(R.id.dealer_card3);
         aiCard4 = findViewById(R.id.dealer_card4);
         aiCard5 = findViewById(R.id.dealer_card5);
+
+
 
         startButton.setOnClickListener(new View.OnClickListener() {
 
@@ -376,6 +385,10 @@ public class GameActivity extends Activity {
                 String b = "Bet: ";
                 String a = String.valueOf(b) + String.valueOf(bet);
                 bet_txt.setText(a);
+
+                int maxVol = 100;
+                coin.setVolume(100, 100);
+                coin.start();
             }
         });
 
