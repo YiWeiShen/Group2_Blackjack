@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -114,7 +115,7 @@ public class GameActivity extends Activity {
         aiCard2.setImageResource(cardBack);
         currentPoint = calPoint(userCards);
         String b = "User Point: ";
-        String a = String.valueOf(b) + String.valueOf(currentPoint);
+        String a = b + String.valueOf(currentPoint);
         userPoint.setText(a);
         currentPage = 4;
     }
@@ -138,12 +139,12 @@ public class GameActivity extends Activity {
         if (player == 0) {
             currentPoint = calPoint(cards);
             String b = "User Point: ";
-            String a = String.valueOf(b) + String.valueOf(currentPoint);
+            String a = b + String.valueOf(currentPoint);
             userPoint.setText(a);
         } else {
             computerPoint = calPoint(cards);
             String b = "Dealer Point: ";
-            String a = String.valueOf(b) + String.valueOf(computerPoint);
+            String a = b + String.valueOf(computerPoint);
             dealerPoint.setText(a);
         }
         return cards;
@@ -201,10 +202,10 @@ public class GameActivity extends Activity {
         if (currentPoint == 21) {
             Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
             flag = true;
-        }else if (currentPoint <21 && userCards.size() == 5) {
+        } else if (currentPoint < 21 && userCards.size() == 5) {
             Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
             flag = true;
-        }else if (computerPoint > currentPoint) {
+        } else if (computerPoint > currentPoint) {
             if (computerPoint > 21) {
                 Toast.makeText(GameActivity.this, "YOU WIN", Toast.LENGTH_SHORT).show();
                 flag = true;
@@ -292,9 +293,9 @@ public class GameActivity extends Activity {
         dealerPoint = findViewById(R.id.dealer_point);
         userPoint = findViewById(R.id.user_point);
 
-        username_txt.setText("User: "+ user.getUsername());
-        balance_txt.setText("Balance: "+user.getBalance());
-        score_txt.setText("Score: "+user.getScore());
+        username_txt.setText("User: " + user.getUsername());
+        balance_txt.setText("Balance: " + user.getBalance());
+        score_txt.setText("Score: " + user.getScore());
 
         userCard1 = findViewById(R.id.player_card1);
         userCard2 = findViewById(R.id.player_card2);
@@ -310,12 +311,6 @@ public class GameActivity extends Activity {
         final MediaPlayer coin = MediaPlayer.create(this, R.raw.coin);
         final MediaPlayer yea = MediaPlayer.create(this, R.raw.yea);
         final MediaPlayer ohh = MediaPlayer.create(this, R.raw.ohh);
-//        MediaPlayer bgm = MediaPlayer.create(this, R.raw.casinobgm);
-//        if(!bgm.isPlaying()) {
-//            bgm.setVolume(10, 10);
-//            bgm.setLooping(true);
-//            bgm.start();
-//        }
 
         startButton.setOnClickListener(new View.OnClickListener() {
 
@@ -328,7 +323,7 @@ public class GameActivity extends Activity {
                     stopButton.setEnabled(true);
                 }
                 String b = "Bet: ";
-                String a = String.valueOf(b) + String.valueOf(bet);
+                String a = b + String.valueOf(bet);
                 bet_txt.setText(a);
                 shuffle();
                 deal();
@@ -353,38 +348,28 @@ public class GameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-
                 userTurn();
-                if(endflag){
-                    if(result()){
-                        yea.setVolume(100,100);
+                if (endflag) {
+                    int balance, score;
+                    String name = user.getUsername();
+                    String password = user.getPassword();
+
+                    if (result()) {
+                        // player win
+                        yea.setVolume(100, 100);
                         yea.start();
-                        String name = user.getUsername();
-                        String password = user.getPassword();
-                        int balance = user.getBalance() + bet;
-                        int score = user.getScore() + bet;
-                        Boolean checkupdate = DB.updateUserData( name, password, balance, score);
-//                        if(checkupdate){
-//                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
-//                        }
-//                        else {
-//                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
-//                        }
-                    }else {
-                        ohh.setVolume(100,100);
+                        balance = user.getBalance() + bet;
+                        score = user.getScore() + bet;
+                    } else {
+                        // player lose
+                        ohh.setVolume(100, 100);
                         ohh.start();
-                        String name = user.getUsername();
-                        String password = user.getPassword();
-                        int balance = user.getBalance() - bet;
-                        int score = user.getScore();
-                        Boolean checkupdate = DB.updateUserData( name, password, balance, score);
-//                        if(checkupdate){
-//                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
-//                        }
-//                        else {
-//                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
-//                        }
+                        balance = user.getBalance() - bet;
+                        score = user.getScore();
                     }
+
+                    Boolean checkUpdate = DB.updateUserData(name, password, balance, score);
+                    Log.d("Update score(Endgame): ", String.valueOf(checkUpdate));
                     endflag = false;
                     bet = 0;
                 }
@@ -397,15 +382,15 @@ public class GameActivity extends Activity {
             public void onClick(View v) {
 
                 aiTurn();
-                if(endflag){
-                    if(result()){
-                        yea.setVolume(100,100);
+                if (endflag) {
+                    if (result()) {
+                        yea.setVolume(100, 100);
                         yea.start();
                         String name = user.getUsername();
                         String password = user.getPassword();
                         int balance = user.getBalance() + bet;
                         int score = user.getScore() + bet;
-                        Boolean checkupdate = DB.updateUserData( name, password, balance, score);
+                        Boolean checkupdate = DB.updateUserData(name, password, balance, score);
 
 
 //                        if(checkupdate){
@@ -414,14 +399,14 @@ public class GameActivity extends Activity {
 //                        else {
 //                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
 //                        }
-                    }else {
-                        ohh.setVolume(100,100);
+                    } else {
+                        ohh.setVolume(100, 100);
                         ohh.start();
                         String name = user.getUsername();
                         String password = user.getPassword();
                         int balance = user.getBalance() - bet;
                         int score = user.getScore();
-                        Boolean checkupdate = DB.updateUserData( name, password, balance, score);
+                        Boolean checkupdate = DB.updateUserData(name, password, balance, score);
 //                        if(checkupdate){
 //                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
 //                        }
@@ -550,21 +535,18 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Cursor res = DB.getdata();
-                if(res.getCount() == 0){
+                if (res.getCount() == 0) {
                     Toast.makeText(GameActivity.this, "Nothing existed!", Toast.LENGTH_SHORT).show();
 
-                }
-                else {
+                } else {
                     userList = new ArrayList<>();
                     Users user;
-                    while(res.moveToNext()){
-                        user = new Users(res.getString(0),"hide",res.getInt(1),res.getInt(2));
+                    while (res.moveToNext()) {
+                        user = new Users(res.getString(0), "hide", res.getInt(1), res.getInt(2));
                         userList.add(user);
 
-
-
                     }
-                    Intent intent = new Intent(GameActivity.this,RankingActivity.class);
+                    Intent intent = new Intent(GameActivity.this, RankingActivity.class);
                     intent.putExtra("userlist", userList);
                     startActivity(intent);
 

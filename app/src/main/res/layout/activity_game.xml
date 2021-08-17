@@ -11,6 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="1dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -18,11 +19,9 @@
             android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/dealer"
-            android:textSize="14sp"
+            android:textSize="10sp"
             android:textStyle="bold"
             tools:ignore="NestedWeights" />
     </LinearLayout>
@@ -142,7 +141,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/dealPoint" />
+                android:text="@string/dealPoint"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/user_point"
@@ -150,7 +150,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/userPoint" />
+                android:text="@string/userPoint"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
