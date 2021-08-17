@@ -90,8 +90,8 @@ public class GameActivity extends Activity {
             R.drawable.clubking
     };
 
-    final MediaPlayer coin = MediaPlayer.create(this, R.raw.coin);
-    final MediaPlayer yea = MediaPlayer.create(this, R.raw.yea);
+//    final MediaPlayer coin = MediaPlayer.create(this, R.raw.coin);
+//    final MediaPlayer yea = MediaPlayer.create(this, R.raw.yea);
 
     private void shuffle() {
         for (int i = 0; i < 52; i++) {
@@ -228,9 +228,9 @@ public class GameActivity extends Activity {
         show();
         if (currentPoint >= 21 || userCards.size() == 5) {
             result();
-            if (result()) {
-                yea.start();
-            }
+//            if (result()) {
+//                yea.start();
+//            }
         }
     }
 
@@ -287,6 +287,7 @@ public class GameActivity extends Activity {
         aiCard4 = findViewById(R.id.dealer_card4);
         aiCard5 = findViewById(R.id.dealer_card5);
 
+        final MediaPlayer coin = MediaPlayer.create(this, R.raw.coin);
 
 
         startButton.setOnClickListener(new View.OnClickListener() {
