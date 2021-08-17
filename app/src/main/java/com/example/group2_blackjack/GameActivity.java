@@ -90,9 +90,6 @@ public class GameActivity extends Activity {
             R.drawable.clubking
     };
 
-//    final MediaPlayer coin = MediaPlayer.create(this, R.raw.coin);
-//    final MediaPlayer yea = MediaPlayer.create(this, R.raw.yea);
-
     private void shuffle() {
         for (int i = 0; i < 52; i++) {
             num[i] = i;
@@ -288,7 +285,7 @@ public class GameActivity extends Activity {
         aiCard5 = findViewById(R.id.dealer_card5);
 
         final MediaPlayer coin = MediaPlayer.create(this, R.raw.coin);
-
+        final MediaPlayer yea = MediaPlayer.create(this, R.raw.yea);
 
         startButton.setOnClickListener(new View.OnClickListener() {
 
@@ -310,6 +307,7 @@ public class GameActivity extends Activity {
                 userTurn();
                 if(endflag){
                     if(result()){
+                        yea.start();
                         String name = user.getUsername();
                         String password = user.getPassword();
                         int balance = user.getBalance() + bet;
@@ -348,11 +346,14 @@ public class GameActivity extends Activity {
                 aiTurn();
                 if(endflag){
                     if(result()){
+                        yea.start();
                         String name = user.getUsername();
                         String password = user.getPassword();
                         int balance = user.getBalance() + bet;
                         int score = user.getScore() + bet;
                         Boolean checkupdate = DB.updateUserData( name, password, balance, score);
+
+
 //                        if(checkupdate){
 //                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
 //                        }
@@ -387,6 +388,7 @@ public class GameActivity extends Activity {
                 String a = String.valueOf(b) + String.valueOf(bet);
                 bet_txt.setText(a);
 
+                coin.setVolume(100,100);
                 coin.start();
             }
         });
@@ -399,6 +401,9 @@ public class GameActivity extends Activity {
                 String b = "Bet: ";
                 String a = String.valueOf(b) + String.valueOf(bet);
                 bet_txt.setText(a);
+
+                coin.setVolume(100,100);
+                coin.start();
             }
         });
 
@@ -410,6 +415,9 @@ public class GameActivity extends Activity {
                 String b = "Bet: ";
                 String a = String.valueOf(b) + String.valueOf(bet);
                 bet_txt.setText(a);
+
+                coin.setVolume(100,100);
+                coin.start();
             }
         });
 
@@ -421,6 +429,9 @@ public class GameActivity extends Activity {
                 String b = "Bet: ";
                 String a = String.valueOf(b) + String.valueOf(bet);
                 bet_txt.setText(a);
+
+                coin.setVolume(100,100);
+                coin.start();
             }
         });
 
