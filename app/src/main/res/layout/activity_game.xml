@@ -18,6 +18,7 @@
             android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/dealer"
@@ -39,7 +40,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="3dp"
-            app:cardCornerRadius="8dp"
             tools:srcCompat="@tools:sample/avatars"
             tools:ignore="NestedWeights" />
 
@@ -114,7 +114,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="3dp"
-            app:cardCornerRadius="8dp"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView

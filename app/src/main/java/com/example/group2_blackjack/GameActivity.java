@@ -1,7 +1,5 @@
 package com.example.group2_blackjack;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 
 import android.app.Activity;
 import android.content.Intent;
@@ -237,10 +235,6 @@ public class GameActivity extends Activity {
         clearButton.setAlpha(1.00f);
         rankingButton.setClickable(true);
         rankingButton.setAlpha(1.00f);
-        needButton.setClickable(false);
-        needButton.setAlpha(0.25f);
-        stopButton.setClickable(false);
-        stopButton.setAlpha(0.25f);
         endflag = true;
         return flag;
 
@@ -315,6 +309,7 @@ public class GameActivity extends Activity {
         final MediaPlayer coin = MediaPlayer.create(this, R.raw.coin);
         final MediaPlayer yea = MediaPlayer.create(this, R.raw.yea);
         final MediaPlayer ohh = MediaPlayer.create(this, R.raw.ohh);
+        final MediaPlayer bgm = MediaPlayer.create(this, R.raw.casinobgm);
 
         startButton.setOnClickListener(new View.OnClickListener() {
 
@@ -340,10 +335,8 @@ public class GameActivity extends Activity {
                 clearButton.setAlpha(0.25f);
                 rankingButton.setClickable(false);
                 rankingButton.setAlpha(0.25f);
-                needButton.setClickable(true);
-                needButton.setAlpha(1.00f);
-                stopButton.setClickable(true);
-                stopButton.setAlpha(1.00f);
+
+//                bgm.start();
             }
         });
 
@@ -355,6 +348,7 @@ public class GameActivity extends Activity {
                 userTurn();
                 if(endflag){
                     if(result()){
+                        yea.setVolume(100,100);
                         yea.start();
                         String name = user.getUsername();
                         String password = user.getPassword();
@@ -368,6 +362,7 @@ public class GameActivity extends Activity {
 //                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
 //                        }
                     }else {
+                        ohh.setVolume(100,100);
                         ohh.start();
                         String name = user.getUsername();
                         String password = user.getPassword();
@@ -391,41 +386,42 @@ public class GameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                if (!endflag) {
-                    aiTurn();
-                    if (endflag) {
-                        if (result()) {
-                            yea.start();
-                            String name = user.getUsername();
-                            String password = user.getPassword();
-                            int balance = user.getBalance() + bet;
-                            int score = user.getScore() + bet;
-                            Boolean checkupdate = DB.updateUserData(name, password, balance, score);
+
+                aiTurn();
+                if(endflag){
+                    if(result()){
+                        yea.setVolume(100,100);
+                        yea.start();
+                        String name = user.getUsername();
+                        String password = user.getPassword();
+                        int balance = user.getBalance() + bet;
+                        int score = user.getScore() + bet;
+                        Boolean checkupdate = DB.updateUserData( name, password, balance, score);
 
 
-                            //                        if(checkupdate){
-                            //                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
-                            //                        }
-                            //                        else {
-                            //                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
-                            //                        }
-                        } else {
-                            ohh.start();
-                            String name = user.getUsername();
-                            String password = user.getPassword();
-                            int balance = user.getBalance() - bet;
-                            int score = user.getScore();
-                            Boolean checkupdate = DB.updateUserData(name, password, balance, score);
-                            //                        if(checkupdate){
-                            //                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
-                            //                        }
-                            //                        else {
-                            //                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
-                            //                        }
-                        }
-                        endflag = false;
-                        bet = 0;
+//                        if(checkupdate){
+//                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
+//                        }
+//                        else {
+//                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
+//                        }
+                    }else {
+                        ohh.setVolume(100,100);
+                        ohh.start();
+                        String name = user.getUsername();
+                        String password = user.getPassword();
+                        int balance = user.getBalance() - bet;
+                        int score = user.getScore();
+                        Boolean checkupdate = DB.updateUserData( name, password, balance, score);
+//                        if(checkupdate){
+//                            Toast.makeText(GameActivity.this, "Entry Updated", Toast.LENGTH_SHORT).show();
+//                        }
+//                        else {
+//                            Toast.makeText(GameActivity.this, "Entry not Updated", Toast.LENGTH_SHORT).show();
+//                        }
                     }
+                    endflag = false;
+                    bet = 0;
                 }
             }
         });
