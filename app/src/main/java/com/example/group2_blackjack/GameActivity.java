@@ -121,12 +121,19 @@ public class GameActivity extends Activity {
 
     private int calPoint(ArrayList<Integer> cards) {
         int temp = 0;
+        Boolean hasAce = false;
         for (Integer i : cards) {
+            if ((i + 1) % 13 == 1) { // Ace
+                hasAce = true;
+            }
             if (i % 13 + 1 > 10) { //JQK=10
                 temp += 10;
             } else {
                 temp += (i + 1) % 13;
             }
+        }
+        if (temp<= 11 && hasAce){ // Ace = 1 or 11
+            return temp + 10;
         }
         return temp;
     }
@@ -366,6 +373,7 @@ public class GameActivity extends Activity {
 
                     Boolean checkUpdate = DB.updateUserData(user.getUsername(), user.getPassword(), user.getBalance(), user.getScore());
                     Log.d("Update/End/UserTurn: ", String.valueOf(checkUpdate));
+                    bet = 0;
                 }
             }
         });
@@ -393,6 +401,7 @@ public class GameActivity extends Activity {
                     }
                     Boolean checkUpdate = DB.updateUserData(user.getUsername(), user.getPassword(), user.getBalance(), user.getScore());
                     Log.d("Update/End/aiTurn: ", String.valueOf(checkUpdate));
+                    bet = 0;
                 }
             }
         });
@@ -507,6 +516,7 @@ public class GameActivity extends Activity {
                         }
                         Boolean checkUpdate = DB.updateUserData(user.getUsername(), user.getPassword(), user.getBalance(), user.getScore());
                         Log.d("Update/End/UserTurn: ", String.valueOf(checkUpdate));
+                        bet = 0;
                     }
                 } else {
                     Toast.makeText(GameActivity.this, "Not enough balance!", Toast.LENGTH_SHORT).show();
@@ -531,7 +541,6 @@ public class GameActivity extends Activity {
                 user_point_txt.setAlpha(0.0f);
 
                 score_txt.setText("Score: " + user.getScore());
-
 
                 aiCard1.setImageResource(android.R.color.transparent);
                 aiCard2.setImageResource(android.R.color.transparent);
@@ -561,7 +570,6 @@ public class GameActivity extends Activity {
                 player = 0;
                 currentPage = 0;
                 endFlag = false;
-                bet = 0;
                 aiPoint = 0;
                 userCards = new ArrayList<Integer>();
                 dealerCards = new ArrayList<Integer>();
