@@ -29,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
         login_passwordInput = findViewById(R.id.login_passwordInput);
         login_nameInput = findViewById(R.id.login_nameInput);
 
+        final MediaPlayer bgm = MediaPlayer.create(this, R.raw.casinobgm);
+        bgm.setVolume(0.2f, 0.2f);
+        bgm.start();
+
         DB = new DBHelper(this);
 
         reg_btn.setOnClickListener(new View.OnClickListener() {

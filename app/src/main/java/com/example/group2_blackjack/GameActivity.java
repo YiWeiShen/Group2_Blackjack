@@ -4,7 +4,9 @@ package com.example.group2_blackjack;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -89,6 +91,9 @@ public class GameActivity extends Activity {
             R.drawable.clubqueen,
             R.drawable.clubking
     };
+
+    private SoundPool soundPool;
+    private int casinobgm, coin, ohh, yea;
 
     private void shuffle() {
         for (int i = 0; i < 52; i++) {
@@ -312,6 +317,10 @@ public class GameActivity extends Activity {
         final MediaPlayer yea = MediaPlayer.create(this, R.raw.yea);
         final MediaPlayer ohh = MediaPlayer.create(this, R.raw.ohh);
 
+        coin.setVolume(1.0f,1.0f);
+        yea.setVolume(1.0f,1.0f);
+        ohh.setVolume(1.0f,1.0f);
+
         dealButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -361,13 +370,11 @@ public class GameActivity extends Activity {
                     show();
                     if (result()) {
                         // player wins
-                        yea.setVolume(100, 100);
                         yea.start();
                         user.setBalance(user.getBalance() + bet * 2);
                         user.setScore(user.getScore() + bet);
                     } else {
                         // player loses
-                        ohh.setVolume(100, 100);
                         ohh.start();
                     }
 
@@ -390,13 +397,11 @@ public class GameActivity extends Activity {
                     show();
                     if (result()) {
                         // player wins
-                        yea.setVolume(100, 100);
                         yea.start();
                         user.setBalance(user.getBalance() + bet * 2);
                         user.setScore(user.getScore() + bet);
                     } else {
                         // player loses
-                        ohh.setVolume(100, 100);
                         ohh.start();
                     }
                     Boolean checkUpdate = DB.updateUserData(user.getUsername(), user.getPassword(), user.getBalance(), user.getScore());
@@ -503,7 +508,6 @@ public class GameActivity extends Activity {
                         show();
                         if (result()) {
                             // player wins
-                            yea.setVolume(100, 100);
                             yea.start();
                             user.setBalance(user.getBalance() + bet * 2);
                             user.setScore(user.getScore() + bet);
@@ -511,7 +515,6 @@ public class GameActivity extends Activity {
                             score_txt.setText("Score: " + user.getScore());
                         } else {
                             // player loses
-                            ohh.setVolume(100, 100);
                             ohh.start();
                         }
                         Boolean checkUpdate = DB.updateUserData(user.getUsername(), user.getPassword(), user.getBalance(), user.getScore());
