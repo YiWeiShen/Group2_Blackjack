@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="round_btn">#FF9800</color>
+    <color name="round_btn1">#03A9F4</color>
+    <color name="round_btn2">#FF5722</color>
 </resources>

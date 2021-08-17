@@ -48,6 +48,7 @@
                         android:ems="10"
                         android:hint="Enter your username"
                         android:inputType="textPersonName"
+                        android:textColorHint="#434343"
                         android:minHeight="48dp" />
 
                     <EditText
@@ -58,6 +59,7 @@
                         android:ems="10"
                         android:hint="Enter your password"
                         android:inputType="textPassword"
+                        android:textColorHint="#434343"
                         android:minHeight="48dp" />
 
                     <Button

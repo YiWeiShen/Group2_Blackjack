@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".RegisterActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#4CAF50">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
                 android:gravity="bottom"
                 android:minHeight="40dp"
                 android:text="@string/username_label"
@@ -40,17 +41,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
                 android:ems="10"
                 android:hint="@string/username_hint"
                 android:importantForAutofill="no"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
+                android:textColorHint="#434343"
                 tools:ignore="TextContrastCheck" />
 
             <TextView
                 android:id="@+id/password_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"
                 android:layout_marginLeft="50dp"
                 android:gravity="bottom"
                 android:minHeight="40dp"
@@ -62,18 +66,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
                 android:ems="10"
                 android:hint="@string/pw_hint"
                 android:importantForAutofill="no"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
-                android:textColorHint="#757575"
+                android:textColorHint="#434343"
                 tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
 
             <TextView
                 android:id="@+id/password_confirm_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"
                 android:layout_marginLeft="50dp"
                 android:gravity="bottom"
                 android:minHeight="40dp"
@@ -85,12 +91,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
                 android:ems="10"
                 android:hint="@string/pw_confirm_hint"
                 android:importantForAutofill="no"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
-                android:textColorHint="#757575"
+                android:textColorHint="#434343"
                 tools:ignore="TextContrastCheck" />
 
             <Button
