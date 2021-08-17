@@ -281,6 +281,10 @@ public class GameActivity extends Activity {
         doubleButton = findViewById(R.id.btn_double);
         rankingButton = findViewById(R.id.btn_ranking);
 
+        startButton.setEnabled(false);
+        needButton.setEnabled(false);
+        stopButton.setEnabled(false);
+
         bet_txt = findViewById((R.id.bet));
         username_txt = findViewById(R.id.username_ingame);
         balance_txt = findViewById(R.id.balance_ingame);
@@ -306,13 +310,23 @@ public class GameActivity extends Activity {
         final MediaPlayer coin = MediaPlayer.create(this, R.raw.coin);
         final MediaPlayer yea = MediaPlayer.create(this, R.raw.yea);
         final MediaPlayer ohh = MediaPlayer.create(this, R.raw.ohh);
-        final MediaPlayer bgm = MediaPlayer.create(this, R.raw.casinobgm);
+//        MediaPlayer bgm = MediaPlayer.create(this, R.raw.casinobgm);
+//        if(!bgm.isPlaying()) {
+//            bgm.setVolume(10, 10);
+//            bgm.setLooping(true);
+//            bgm.start();
+//        }
 
         startButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 onCreate(null);
+                if (!startButton.isEnabled()) {
+                    startButton.setEnabled(true);
+                    needButton.setEnabled(true);
+                    stopButton.setEnabled(true);
+                }
                 String b = "Bet: ";
                 String a = String.valueOf(b) + String.valueOf(bet);
                 bet_txt.setText(a);
@@ -332,7 +346,6 @@ public class GameActivity extends Activity {
                 clearButton.setAlpha(0.25f);
                 rankingButton.setClickable(false);
                 rankingButton.setAlpha(0.25f);
-
             }
         });
 
@@ -418,6 +431,9 @@ public class GameActivity extends Activity {
                     }
                     endflag = false;
                     bet = 0;
+
+                    needButton.setEnabled(false);
+                    stopButton.setEnabled(false);
                 }
             }
         });
@@ -426,10 +442,17 @@ public class GameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                bet = 10;
-                String b = "Bet: ";
-                String a = String.valueOf(b) + String.valueOf(bet);
-                bet_txt.setText(a);
+                if (!startButton.isEnabled()) {
+                    startButton.setEnabled(true);
+                }
+                if (user.getBalance() >= 10) {
+                    bet = 10;
+                    String b = "Bet: ";
+                    String a = String.valueOf(b) + String.valueOf(bet);
+                    bet_txt.setText(a);
+                } else {
+                    Toast.makeText(GameActivity.this, "Not enough balance!", Toast.LENGTH_SHORT).show();
+                }
 
                 coin.start();
             }
@@ -439,10 +462,17 @@ public class GameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                bet = 20;
-                String b = "Bet: ";
-                String a = String.valueOf(b) + String.valueOf(bet);
-                bet_txt.setText(a);
+                if (!startButton.isEnabled()) {
+                    startButton.setEnabled(true);
+                }
+                if (user.getBalance() >= 20) {
+                    bet = 20;
+                    String b = "Bet: ";
+                    String a = String.valueOf(b) + String.valueOf(bet);
+                    bet_txt.setText(a);
+                } else {
+                    Toast.makeText(GameActivity.this, "Not enough balance!", Toast.LENGTH_SHORT).show();
+                }
 
                 coin.start();
             }
@@ -452,10 +482,17 @@ public class GameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                bet = 50;
-                String b = "Bet: ";
-                String a = String.valueOf(b) + String.valueOf(bet);
-                bet_txt.setText(a);
+                if (!startButton.isEnabled()) {
+                    startButton.setEnabled(true);
+                }
+                if (user.getBalance() >= 50) {
+                    bet = 50;
+                    String b = "Bet: ";
+                    String a = String.valueOf(b) + String.valueOf(bet);
+                    bet_txt.setText(a);
+                } else {
+                    Toast.makeText(GameActivity.this, "Not enough balance!", Toast.LENGTH_SHORT).show();
+                }
 
                 coin.start();
             }
@@ -465,10 +502,17 @@ public class GameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                bet = 100;
-                String b = "Bet: ";
-                String a = String.valueOf(b) + String.valueOf(bet);
-                bet_txt.setText(a);
+                if (!startButton.isEnabled()) {
+                    startButton.setEnabled(true);
+                }
+                if (user.getBalance() >= 100) {
+                    bet = 100;
+                    String b = "Bet: ";
+                    String a = String.valueOf(b) + String.valueOf(bet);
+                    bet_txt.setText(a);
+                } else {
+                    Toast.makeText(GameActivity.this, "Not enough balance!", Toast.LENGTH_SHORT).show();
+                }
 
                 coin.start();
             }
@@ -478,12 +522,16 @@ public class GameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                bet = bet * 2;
-                String b = "Bet: ";
-                String a = String.valueOf(b) + String.valueOf(bet);
-                bet_txt.setText(a);
+                if ((bet * 2) < user.getBalance()) {
+                    bet = bet * 2;
+                    String b = "Bet: ";
+                    String a = String.valueOf(b) + String.valueOf(bet);
+                    bet_txt.setText(a);
 
-                coin.start();
+                    coin.start();
+                } else {
+                    Toast.makeText(GameActivity.this, "Not enough balance!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

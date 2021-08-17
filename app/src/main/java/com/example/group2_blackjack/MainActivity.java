@@ -31,11 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
         DB = new DBHelper(this);
 
-        MediaPlayer bgm = MediaPlayer.create(this, R.raw.casinobgm);
-        bgm.setVolume(60,60);
-        bgm.setLooping(true);
-        bgm.start();
-
         reg_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
