@@ -94,7 +94,7 @@ public class GameActivity extends Activity {
         for (int i = 0; i < 52; i++) {
             nums[i] = i;
         }
-        for (int j = 0; j < 200; j++) {
+        for (int j = 0; j < 300; j++) {
             Random r = new Random();
             int i1 = r.nextInt(52);
             int i2 = r.nextInt(52);
@@ -147,47 +147,32 @@ public class GameActivity extends Activity {
 
     private void show() {
         if (player == 0) {
-            for (int i = 0; i < userCards.size(); i++) {
-                switch (i) {
-                    case 0:
-                        userCard1.setImageResource(cardArray[userCards.get(0)]);
-                        break;
-                    case 1:
-                        userCard2.setImageResource(cardArray[userCards.get(1)]);
-                        break;
-                    case 2:
-                        userCard3.setImageResource(cardArray[userCards.get(2)]);
-                        break;
-                    case 3:
-                        userCard4.setImageResource(cardArray[userCards.get(3)]);
-                        break;
-                    case 4:
-                        userCard5.setImageResource(cardArray[userCards.get(4)]);
-                        break;
-                }
+            switch (userCards.size()) {
+                case 5:
+                    userCard5.setImageResource(cardArray[userCards.get(4)]);
+                case 4:
+                    userCard4.setImageResource(cardArray[userCards.get(3)]);
+                case 3:
+                    userCard3.setImageResource(cardArray[userCards.get(2)]);
+                case 2:
+                    userCard2.setImageResource(cardArray[userCards.get(1)]);
+                case 1:
+                    userCard1.setImageResource(cardArray[userCards.get(0)]);
             }
         } else {
-            for (int i = 0; i < dealerCards.size(); i++) {
-                switch (i) {
-                    case 0:
-                        aiCard1.setImageResource(cardArray[dealerCards.get(0)]);
-                        break;
-                    case 1:
-                        aiCard2.setImageResource(cardArray[dealerCards.get(1)]);
-                        break;
-                    case 2:
-                        aiCard3.setImageResource(cardArray[dealerCards.get(2)]);
-                        break;
-                    case 3:
-                        aiCard4.setImageResource(cardArray[dealerCards.get(3)]);
-                        break;
-                    case 4:
-                        aiCard5.setImageResource(cardArray[dealerCards.get(4)]);
-                        break;
-                }
+            switch (dealerCards.size()) {
+                case 5:
+                    aiCard5.setImageResource(cardArray[dealerCards.get(4)]);
+                case 4:
+                    aiCard4.setImageResource(cardArray[dealerCards.get(3)]);
+                case 3:
+                    aiCard3.setImageResource(cardArray[dealerCards.get(2)]);
+                case 2:
+                    aiCard2.setImageResource(cardArray[dealerCards.get(1)]);
+                case 1:
+                    aiCard1.setImageResource(cardArray[dealerCards.get(0)]);
             }
         }
-
     }
 
     private boolean result() {
@@ -238,6 +223,7 @@ public class GameActivity extends Activity {
     }
 
     private void userTurn() {
+        player = 0;
         userCards = hitCard(userCards);
         show();
         if (userPoint >= 21 || userCards.size() == 5) {
@@ -254,8 +240,8 @@ public class GameActivity extends Activity {
                 break;
             }
             dealerCards = hitCard(dealerCards);
-            show();
         }
+        show();
         result();
     }
 
@@ -363,6 +349,9 @@ public class GameActivity extends Activity {
             public void onClick(View v) {
                 userTurn();
                 if (endFlag) {
+                    // game ends and set player to 1 for showing the cards
+                    player = 1;
+                    show();
                     if (result()) {
                         // player wins
                         yea.setVolume(100, 100);
@@ -377,8 +366,6 @@ public class GameActivity extends Activity {
 
                     Boolean checkUpdate = DB.updateUserData(user.getUsername(), user.getPassword(), user.getBalance(), user.getScore());
                     Log.d("Update/End/UserTurn: ", String.valueOf(checkUpdate));
-                    endFlag = false;
-                    bet = 0;
                 }
             }
         });
@@ -390,6 +377,9 @@ public class GameActivity extends Activity {
 
                 aiTurn();
                 if (endFlag) {
+                    // game ends and set player to 1 for showing the cards
+                    player = 1;
+                    show();
                     if (result()) {
                         // player wins
                         yea.setVolume(100, 100);
@@ -403,10 +393,6 @@ public class GameActivity extends Activity {
                     }
                     Boolean checkUpdate = DB.updateUserData(user.getUsername(), user.getPassword(), user.getBalance(), user.getScore());
                     Log.d("Update/End/aiTurn: ", String.valueOf(checkUpdate));
-                    endFlag = false;
-                    bet = 0;
-                    hitButton.setEnabled(false);
-                    standButton.setEnabled(false);
                 }
             }
         });
@@ -415,11 +401,11 @@ public class GameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                if (!dealButton.isEnabled()) {
-                    dealButton.setEnabled(true);
-                    dealButton.setAlpha(1.0f);
-                }
                 if (user.getBalance() >= 10) {
+                    if (!dealButton.isEnabled()) {
+                        dealButton.setEnabled(true);
+                        dealButton.setAlpha(1.0f);
+                    }
                     coin.start();
                     bet += 10;
                     user.setBalance(user.getBalance() - 10);
@@ -435,11 +421,11 @@ public class GameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                if (!dealButton.isEnabled()) {
-                    dealButton.setEnabled(true);
-                    dealButton.setAlpha(1.0f);
-                }
                 if (user.getBalance() >= 20) {
+                    if (!dealButton.isEnabled()) {
+                        dealButton.setEnabled(true);
+                        dealButton.setAlpha(1.0f);
+                    }
                     coin.start();
                     bet += 20;
                     user.setBalance(user.getBalance() - 20);
@@ -455,11 +441,11 @@ public class GameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                if (!dealButton.isEnabled()) {
-                    dealButton.setEnabled(true);
-                    dealButton.setAlpha(1.0f);
-                }
                 if (user.getBalance() >= 50) {
+                    if (!dealButton.isEnabled()) {
+                        dealButton.setEnabled(true);
+                        dealButton.setAlpha(1.0f);
+                    }
                     coin.start();
                     bet += 50;
                     user.setBalance(user.getBalance() - 50);
@@ -475,11 +461,11 @@ public class GameActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                if (!dealButton.isEnabled()) {
-                    dealButton.setEnabled(true);
-                    dealButton.setAlpha(1.0f);
-                }
                 if (user.getBalance() >= 100) {
+                    if (!dealButton.isEnabled()) {
+                        dealButton.setEnabled(true);
+                        dealButton.setAlpha(1.0f);
+                    }
                     coin.start();
                     bet += 100;
                     user.setBalance(user.getBalance() - 100);
@@ -503,6 +489,9 @@ public class GameActivity extends Activity {
                     balance_txt.setText("Balance: " + user.getBalance());
                     userTurn();
                     if (endFlag) {
+                        // game ends and set player to 1 for showing the cards
+                        player = 1;
+                        show();
                         if (result()) {
                             // player wins
                             yea.setVolume(100, 100);
@@ -518,8 +507,6 @@ public class GameActivity extends Activity {
                         }
                         Boolean checkUpdate = DB.updateUserData(user.getUsername(), user.getPassword(), user.getBalance(), user.getScore());
                         Log.d("Update/End/UserTurn: ", String.valueOf(checkUpdate));
-                        endFlag = false;
-                        bet = 0;
                     }
                 } else {
                     Toast.makeText(GameActivity.this, "Not enough balance!", Toast.LENGTH_SHORT).show();
@@ -539,10 +526,12 @@ public class GameActivity extends Activity {
                 dealButton.setEnabled(false);
                 dealButton.setAlpha(0.25f);
 
+                dealer_point_txt.setText("Dealer Point: ");
                 dealer_point_txt.setAlpha(0.0f);
                 user_point_txt.setAlpha(0.0f);
 
                 score_txt.setText("Score: " + user.getScore());
+
 
                 aiCard1.setImageResource(android.R.color.transparent);
                 aiCard2.setImageResource(android.R.color.transparent);
@@ -568,7 +557,14 @@ public class GameActivity extends Activity {
                 rankingButton.setEnabled(true);
                 rankingButton.setAlpha(1.00f);
 
+                // reset game status
                 player = 0;
+                currentPage = 0;
+                endFlag = false;
+                bet = 0;
+                aiPoint = 0;
+                userCards = new ArrayList<Integer>();
+                dealerCards = new ArrayList<Integer>();
             }
         });
 
