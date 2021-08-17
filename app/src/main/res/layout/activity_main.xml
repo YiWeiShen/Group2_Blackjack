@@ -18,18 +18,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/login_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
                 android:layout_gravity="center"
-                android:layout_margin="20dp"
-                android:text="@string/login_txt"
-                android:textSize="96sp" />
+                android:layout_weight="3"
+                android:contentDescription="@string/contentDescription_logo"
+                app:srcCompat="@drawable/logo" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="3"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -48,8 +49,8 @@
                         android:ems="10"
                         android:hint="Enter your username"
                         android:inputType="textPersonName"
-                        android:textColorHint="#434343"
-                        android:minHeight="48dp" />
+                        android:minHeight="48dp"
+                        android:textColorHint="#434343" />
 
                     <EditText
                         android:id="@+id/login_passwordInput"
@@ -59,8 +60,8 @@
                         android:ems="10"
                         android:hint="Enter your password"
                         android:inputType="textPassword"
-                        android:textColorHint="#434343"
-                        android:minHeight="48dp" />
+                        android:minHeight="48dp"
+                        android:textColorHint="#434343" />
 
                     <Button
                         android:id="@+id/login_btn"

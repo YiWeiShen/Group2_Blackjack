@@ -47,4 +47,5 @@
     <string name="contentDescription_user_card3">user_card3</string>
     <string name="contentDescription_user_card4">user_card4</string>
     <string name="contentDescription_user_card5">user_card5</string>
+    <string name="contentDescription_logo">logo</string>
 </resources>
