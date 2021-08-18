@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         final MediaPlayer bgm = MediaPlayer.create(this, R.raw.casinobgm);
         bgm.setVolume(0.2f, 0.2f);
+        bgm.setLooping(true);
         bgm.start();
 
         DB = new DBHelper(this);
